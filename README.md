@@ -25,11 +25,33 @@ Clone current repository to temporary directory with `git clone https://github.c
 
 #### Adding wibar to Awesome WM screens
 
-Open your Awesome WM lua configuration file (`~/.config/awesome/rc.lua` by default) in text editor and add the following strings at the begging of file:
+1. Open your Awesome WM lua configuration file (`~/.config/awesome/rc.lua` by default) in text editor.
+
+2. Include required modules by adding the following strings to the beginning:
 
 ```lua
-require
+local base16 = require("base16")
+local wibars = require("wibars")
+local arrowlain  = wibars.arrowlain
 ```
+
+3. Find `awful.screen.connect_for_each_screen` function call and add the following code to the end of function described in parameters:
+
+```lua
+s.mywibox = arrowlain.wibar ({
+    position 	= "bottom",
+    visible   	= true,
+    height   	= 16,
+    screen 	= s,
+    cs		= base16.solarized_dark,
+    font   	= beautiful.font,
+    direction 	= "left",
+    spacer 	= true,
+    compact	= false
+})
+```
+
+This code will create wibar for each Awesome screen.
 
 ### Troubleshooting
 
