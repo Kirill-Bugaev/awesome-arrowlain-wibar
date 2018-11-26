@@ -16,10 +16,10 @@ This project was inspired by <a href="https://github.com/lcpz/awesome-copycats">
 
 <h3><a name="Introduction">1. Introduction</a></h3>
 
-<h3>2. Screenshots</h3>
+<h3><a name="Screenshots">2. Screenshots</a></h3>
 
-<h3>3. Installation</h3>
+<h3><a name="Installation">3. Installation</a></h3>
 
-<h3>4. Configuring</h3>
+<h3><a name="Configuring">4. Configuring</a></h3>
 
-<h3>5. Troubleshooting</h3>
+<h3><a name="Troubleshooting">5. Troubleshooting</a></h3>
