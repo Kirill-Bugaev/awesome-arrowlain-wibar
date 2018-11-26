@@ -1,0 +1,75 @@
+--[[
+
+     Margins for arrowlain wibar widgets 
+     (c)2018 Kirill Bugaev
+
+--]]
+
+local margins = {
+    clock = { 
+	left = 3,
+	right = 8
+    },
+    weather = { 
+	left = 4,
+	right = 8
+    },
+    battery = { 
+	left = 3,
+	right = 8
+    },
+    volume = { 
+	left = 3,
+	right = 8
+    },
+    kblayout = { 
+	left = 4,
+	right = 2
+    },
+    cpuload = { 
+	left = 0,
+	right = 8
+    },
+    cpu = { 
+	left = 4,
+	right = 8
+    },
+    ram = { 
+	left = 0,
+	right = 8
+    },
+    ramsys = { 
+	left = 4,
+	right = 8
+    },
+    fs = { 
+	left = 0,
+	right = 8
+    },
+    fshdd = { 
+	left = 4,
+	right = 8
+    },
+    net = { 
+	left = 4,
+	right = 8
+    },
+    between_mailboxes = { 
+	left = 0,
+	right = 10
+    },
+    mail = { 
+	left = 4,
+	right = 8
+    },
+    between_naked = { 
+	left = 0,
+	right = 5
+    }
+}
+
+local function factory ()
+    return margins
+end
+
+return factory()
