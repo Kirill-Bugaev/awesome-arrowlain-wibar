@@ -3,7 +3,7 @@ Wibar in arrow style with modified Lain widgets for Awesome WM
 
 This project was inspired by <a href="https://github.com/lcpz/awesome-copycats">lcpz/awesome-copycast<a> Powerarrow theme and Vim <a href="https://github.com/powerline/powerline">Powerline<a> plugin. 
 
-<b>Content.</b>
+<h2>Content.</h2>
 1. Introduction
 2. Screenshots
 3. Installation
