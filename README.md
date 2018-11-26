@@ -5,11 +5,11 @@ This project was inspired by <a href="https://github.com/lcpz/awesome-copycats">
 
 <h2>Content.</h2>
 <ol>
-  <li>1. Introduction</li>
-  <li>2. Screenshots</li>
-  <li>3. Installation</li>
-  <li>4. Configuring</li>
-  <li>5. Troubleshooting</li>
+  <li>Introduction</li>
+  <li>Screenshots</li>
+  <li>Installation</li>
+  <li>Configuring</li>
+  <li>Troubleshooting</li>
 </ol>
 
 <hr>
