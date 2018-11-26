@@ -34,28 +34,27 @@ Clone current repository to temporary directory with `git clone https://github.c
 local base16 = require("base16")
 -- My wibars
 local wibars = require("wibars")
-local arrowlain  = wibars.arrowlain
+local arrowlain = wibars.arrowlain
 ```
 
-3. Find `awful.screen.connect_for_each_screen` function call and add the code which will create wibar for each Awesome screen to the end of function described in parameters. It should looks something like this:
+3. Find `awful.screen.connect_for_each_screen` function call and add the code which will create wibar for each Awesome screen to the end of function described in parameters. It should look something like this:
 
 ```lua
 awful.screen.connect_for_each_screen(function(s)
 ...
--- Code that you should add
----------------------------
+-- {{{ Code that you should add
     s.mywibox = arrowlain.wibar ({
 	position 	= "bottom",
 	visible   	= true,
 	height   	= 16,
-	screen 	= s,
+	screen 		= s,
 	cs		= base16.solarized_dark,
-	font   	= beautiful.font,
+	font   		= beautiful.font,
 	direction 	= "left",
-	spacer 	= true,
-	compact	= false
+	spacer		= true,
+	compact		= false
     })
----------------------------
+-- }}}
 end)
 ```
 
