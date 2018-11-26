@@ -19,7 +19,10 @@ See the [troubleshooting][] section if you're having any issues with the wibar.
 
 ### Installation
 
+Clone current repository to temporary directory with `git clone https://github.com/Kirill-Bugaev/awesome-arrowlain-wibar.git`. Copy `base16`, `lainmod` and `wibars` directories from `awesome-arrowlain-wibar` directory to your Awesome WM configuration directory (`~/.config/awesome` by default).
+
 ### Configuration
+
 
 ### Troubleshooting
 
