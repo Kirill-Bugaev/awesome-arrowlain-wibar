@@ -1,11 +1,17 @@
 # awesome-arrowlain-wibar
 Wibar in arrow style with modified Lain widgets for Awesome WM
 
-Making of this wibar was inspired by <a href="https://github.com/lcpz/awesome-copycats">lcpz/awesome-copycast<a> Powerarrow theme
+This project was inspired by <a href="https://github.com/lcpz/awesome-copycats">lcpz/awesome-copycast<a> Powerarrow theme and Vim <a href=" https://github.com/powerline/powerline">Powerline<a> plugin. 
 
 <b>Content.</b>
-1. Installation
-2. Configuring
-3. Troubleshooting
+1. Introduction
+2. Screenshots
+3. Installation
+4. Configuring
+5. Troubleshooting
 
-<b>1. Installation</b>
+<b>1. Introduction</b>
+
+<b>2. Screenshots</b>
+
+<b>3. Installation</b>
