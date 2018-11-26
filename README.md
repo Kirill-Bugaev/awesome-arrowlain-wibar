@@ -7,9 +7,13 @@ Content
 -------
 
 [1. Introduction][]
+
 [2. Screenshots][]
+
 [3. Installation][]
+
 [4. Configuration][]
+
 [5. Troubleshooting][]
 
 ### Introduction
