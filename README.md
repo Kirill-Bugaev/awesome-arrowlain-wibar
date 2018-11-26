@@ -15,7 +15,7 @@ This project was inspired by <a href="https://github.com/lcpz/awesome-copycats">
 <hr>
 
 <h3><a name="Introduction">1. Introduction</a></h3>
-This wibar is an extension for Awesome WM which allows you to monitor state of your system create better-looking, more functional vim statuslines. See the screenshots below for a demonstration of the plugin's capabilities
+This wibar is an extension for Awesome WM which allows you to monitor system and hardware state, current weather and forecast, mailboxes, etc. See the screenshots below for a demonstration of the wibar capabilities.
 
 <h3><a name="Screenshots">2. Screenshots</a></h3>
 
