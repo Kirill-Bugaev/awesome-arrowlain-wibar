@@ -6,10 +6,10 @@ This project was inspired by <a href="https://github.com/lcpz/awesome-copycats">
 <h2>Content.</h2>
 <ol>
   <a href="#Introduction"><li>Introduction</li></a>
-  <li>Screenshots</li>
-  <li>Installation</li>
-  <li>Configuring</li>
-  <li>Troubleshooting</li>
+  <a href="#Screenshots"><li>Screenshots</li></a>
+  <a href="#Installation"><li>Installation</li></a>
+  <a href="#Configuring"><li>Configuring</li></a>
+  <a href="#Troubleshooting"><li>Troubleshooting</li></a>
 </ol>
 
 <hr>
