@@ -5,7 +5,7 @@ This project was inspired by <a href="https://github.com/lcpz/awesome-copycats">
 
 <h2>Content.</h2>
 <ol>
-  <li><a href="#Introduction">Introduction</a></li>
+  <a href="#Introduction"><li>Introduction</li></a>
   <li>Screenshots</li>
   <li>Installation</li>
   <li>Configuring</li>
