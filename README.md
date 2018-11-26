@@ -16,8 +16,7 @@ This project was inspired by <a href="https://github.com/lcpz/awesome-copycats">
 
 <h3><a name="Introduction">1. Introduction</a></h3>
 This wibar is an extension for Awesome WM which allows you to monitor system and hardware state, current weather and forecast, mailboxes, etc. See the <a href="#Screenshots">screenshots</a> below for a demonstration of the wibar capabilities.
-
-
+</br>
 See the <a href="#Troubleshooting">Troubleshooting</a> section below if you're having any issues with the wibar. 
 
 <h3><a name="Screenshots">2. Screenshots</a></h3>
