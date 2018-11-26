@@ -23,3 +23,4 @@ See the [troubleshooting][] section if you're having any issues with the wibar.
 [lcpz/lain]: https://github.com/lcpz/lain
 [screenshots]: #Screenshots
 [troubleshooting]: #Troubleshooting
+[configuration]: #Configuration
