@@ -1,7 +1,7 @@
 # awesome-arrowlain-wibar
 Wibar in arrow style with modified Lain widgets for Awesome WM
 
-This project was inspired by <a href="https://github.com/lcpz/awesome-copycats">lcpz/awesome-copycast<a> Powerarrow theme and Vim <a href="https://github.com/powerline/powerline">Powerline<a> plugin. 
+This project was inspired by <a href="https://github.com/lcpz/awesome-copycats">lcpz/awesome-copycast<a> Powerarrow theme and Vim <a href="https://github.com/powerline/powerline">Powerline<a> plugin. It uses modified Lain widgets, originals can be found here.
 
 <h2>Content.</h2>
 <ol>
@@ -15,6 +15,7 @@ This project was inspired by <a href="https://github.com/lcpz/awesome-copycats">
 <hr>
 
 <h3><a name="Introduction">1. Introduction</a></h3>
+This wibar is an extension for Awesome WM which allows you to monitor state of your system create better-looking, more functional vim statuslines. See the screenshots below for a demonstration of the plugin's capabilities
 
 <h3><a name="Screenshots">2. Screenshots</a></h3>
 
