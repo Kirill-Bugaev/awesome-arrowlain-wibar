@@ -23,6 +23,13 @@ Clone current repository to temporary directory with `git clone https://github.c
 
 ### Configuration
 
+#### Adding wibar to Awesome WM screens
+
+Open your Awesome WM lua configuration file (`~/.config/awesome/rc.lua` by default) in text editor and add the following strings at the begging of file:
+
+```lua
+require
+```
 
 ### Troubleshooting
 
