@@ -5,7 +5,9 @@ This project was inspired by [lcpz/awesome-copycast][] Powerarrow theme and Vim 
 
 ### Introduction
 
-This wibar is an extension for Awesome WM which allows you to monitor system and hardware state, current weather and forecast, mailboxes, etc. See the [screenshots][] below for a demonstration of the wibar capabilities and the [troubleshooting][] section below if you're having any issues with the wibar. 
+This wibar is an extension for Awesome WM which allows you to monitor system and hardware state, current weather and forecast, mailboxes, etc. See the [screenshots][] below for a demonstration of the wibar capabilities.
+The most laborious part is configuring widgets is described in [configuration][] section.
+See the [troubleshooting][] section if you're having any issues with the wibar. 
 
 ### Screenshots
 
