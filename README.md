@@ -10,8 +10,8 @@ This project was inspired by <a href="https://github.com/lcpz/awesome-copycats">
 4. Configuring
 5. Troubleshooting
 
-<b>1. Introduction</b>
+<h3>1. Introduction</h3>
 
-<b>2. Screenshots</b>
+<h3>2. Screenshots</h3>
 
-<b>3. Installation</b>
+<h3>3. Installation</h3>
