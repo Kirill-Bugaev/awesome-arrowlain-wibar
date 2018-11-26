@@ -13,7 +13,7 @@ See the [troubleshooting][] section if you're having any issues with the wibar.
 
 ### Screenshots
 
-.. image:: https://github.com/Kirill-Bugaev/awesome-arrowlain-wibar/blob/master/screenshots/screenshot_normal_left_solarized.png
+![Screenshot of normal left solarized](https://github.com/Kirill-Bugaev/awesome-arrowlain-wibar/blob/master/screenshots/screenshot_normal_left_solarized.png)
 
 ### Installation
 
