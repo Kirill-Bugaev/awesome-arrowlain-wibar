@@ -64,15 +64,63 @@ end)
 
 You can customize wibar creating code above to configure wibar appearance. Just change lua table item values proper way in `arrowlain.wibar` function call. If some value is omitted then default will be used. Description list of available options is below:
 
-*  `position` (possible values are `top` or `bottom`, default is `bottom`) set position of wibar on top or bottom of screen.
-*  `visible` (possible values are `true` or `false`, default is `true`) set wibar visibility on Awesome screens.
-*  `height` (possible value is `*any_positive_number*`, default is `16`) set wibar height counted from top or bottom screen border. Recommend to use default value if you don't want that wibar icons look ugly.
-*  `screen` (possible value is `*awesome_screen*`, default is `awful.screen.focused()`) set Awesome screen on which wibar will shown. If you create wibar for each screen in `awful.screen.connect_for_each_screen` function call then set this value equal to screen variable used in argument function (`s` above).
-*  `cs` (possible value is `base16.*color_scheme_name*`, default is `base16.solarized_dark`) set color scheme for wibar. 5 color schemes are available out of box: default light and dark, solarized light and dark, nord. You can add your own color scheme or import existing from [base16][] suite.
-*  `font` (possible value is `*any_font_name_and_size*`, default is `xos4 Terminus 9`) set font for wibar. It is highly recommended to use Terminus font otherwise it may happen that some widgets will show notifies in not right format.
-*  `direction` (possible values are `left` or `right`, default is `left`) set arrow direction and align is opposite to `direction` option value. 
-*  `spacer` (possible values are `true` or `false`, default is `true`) set spacer between arrow widgets, see [screenshots][].
-*  `compact` (possible values are `true` or `false`, default is `false`) toggle compact mode, see [screenshots][].
+*  `position` (`top` or `bottom`, default is `bottom`) set position of wibar on top or bottom of screen.
+*  `visible` (`true` or `false`, default is `true`) set wibar visibility on Awesome screens.
+*  `height` (`*positive_number*`, default is `16`) set wibar height counted from top or bottom screen border. Recommend to use default value if you don't want that wibar icons look ugly.
+*  `screen` (`*awesome_screen*`, default is `awful.screen.focused()`) set Awesome screen on which wibar will shown. If you create wibar for each screen in `awful.screen.connect_for_each_screen` function call then set this value equal to screen variable used in argument function (`s` above).
+*  `cs` (`base16.*color_scheme_name*`, default is `base16.solarized_dark`) set color scheme for wibar. 5 color schemes are available out of box: default light and dark, solarized light and dark, nord. You can add your own color scheme or import existing from [base16][] suite.
+*  `font` (`*font_name_and_size*`, default is `xos4 Terminus 9`) set font for wibar. It is highly recommended to use Terminus font otherwise it may happen that some widgets will show notifies in not right format.
+*  `direction` (`left` or `right`, default is `left`) set arrow direction and align is opposite to `direction` option value. 
+*  `spacer` (`true` or `false`, default is `true`) set spacer between arrow widgets, see [screenshots][].
+*  `compact` (`true` or `false`, default is `false`) toggle compact mode, see [screenshots][].
+
+#### Configuring widgets
+
+Depending on how your system is equipped (which software are installed) some widgets may show "N/A" values. It is normal behaviour for most cases and means that you need to install necessary utilities or configure widgets manually in proper way. But in some cases it may mean that your hardware doesn't support some features, for example you could have no hdd thermometer and therefore can't measure hdd temperature or if you have desktop computer you could have no battery which is the part of laptop. Also it may be that you just don't want to see some widgets on wibar. Any way you can switch off unwanted widgets. Section below describes how to do it.
+
+##### Switching off unwanted widgets
+Open wibar lua configuration file (~/.config/awesome/wibars/arrowlain/wibar.lua by default) in text editor. Comment strokes in `factory` function which correspond creation of naked or wrapped in arrow (wrapped is better choice) widgets which you want to switch off. For example if you want to switch off battery widget you should comment stroke where widget is wrapped in arrow. Your comment should look something like this:
+
+```lua
+...
+    -- Battery
+    local nbattery = widgets.battery(widgetsettings)
+--    local wbattery = arrow_wrapper(nbattery, cs.palette.barbg_violet, dir, margins.battery.left, margins.battery.right, spacer, cs.palette.barbg_yellow, false)	
+...
+```
+
+Wrapped cpu, memory and hdd widgets consist of two naked (not wrapped in arrow) widgets. First shows the load, second -- device temperature (it is a system chipset temperature in case of memory widget). For example if you want to switch off system chipset temperature widget but keep memory load widget you should comment stroke where naked system chipset temperature widget is created and corresponding stroke in lua table where it merges with memory load widget:
+
+```lua
+...
+    -- RAM and system temperature
+    local nram = widgets.ram(widgetsettings)
+--    local nsystemp = widgets.systemp(widgetsettings)
+    local nramsys = wibox.widget {
+	wibox.container.margin(nram, margins.ram.left, margins.ram.right),
+--	wibox.container.margin(nsystemp, margins.systemp.left, margins.systemp.right),
+	layout = wibox.layout.align.horizontal
+    }
+    local wramsys = arrow_wrapper(nramsys, cs.palette.barbg_orange, dir, margins.ramsys.left, margins.ramsys.right, spacer, cs.palette.barbg_green, false)	
+...
+```
+Cpu and hdd temperature widgets can be switched off the same way.
+
+You may want to switch off second mail widget if you have only one mailbox. In order to do this comment stroke where naked second mail widget is created and corresponding stroke in lua table where it merges with first mail widget:
+
+```lua
+...
+    -- IMAP mail
+    local nmail1 = widgets.mail(widgetsettings, secrets.mail1.account, secrets.mail1.password, 1)
+--    local nmail2 = widgets.mail(widgetsettings, secrets.mail2.account, secrets.mail2.password, 0)
+    local nmail = wibox.widget {
+	wibox.container.margin(nmail1, margins.mail1.left, margins.mail1.right),
+--	wibox.container.margin(nmail2, margins.mail2.left, margins.mail2.right),
+	layout = wibox.layout.align.horizontal
+    }
+    local wmail = arrow_wrapper(nmail, cs.palette.barbrbg, dir, margins.mail.left, margins.mail.right, spacer, "alpha", false)
+...
+```
 
 ### Troubleshooting
 
