@@ -12,7 +12,7 @@ local wibox 		= require("wibox")
 local wibars		= require("wibars") 
 
 local secrets = wibars.arrowlain.secrets
---local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
+local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local widgets = wibars.arrowlain.widgets
 local arrow_wrapper = wibars.arrowlain.arrow_wrapper
@@ -44,7 +44,7 @@ local function factory (args)
     local font   	= args.font or "xos4 Terminus 9"
     local cs   		= args.cs or base16.solarized_dark
     local dir	 	= args.direction -- arrow direction
-    if string.lower(dir) ~= "left" then dir = "right" end
+    if string.lower(dir) ~= "right" then dir = "left" end
     local spacer	= args.spacer
     local compact	= args.compact
 
@@ -177,30 +177,30 @@ local function factory (args)
 
     -- Awesome widgets
     -- Prompt box. Make it for screen
---    scr.mypromptbox = awful.widget.prompt()
+    scr.mypromptbox = awful.widget.prompt()
     -- Layout box
---[[    mylayoutbox = awful.widget.layoutbox(scr)
+    mylayoutbox = awful.widget.layoutbox(scr)
     mylayoutbox:buttons(my_table.join(
                            awful.button({ }, 1, function () awful.layout.inc( 1) end),
                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
-]]--
+
     -- Add widgets to wibar
     wibar:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
 	    arrowlain_left,
---            wibox.widget.systray(),
---            scr.mypromptbox,
+            wibox.widget.systray(),
+            scr.mypromptbox,
         },
         -- Middle widget
         nil,
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
 	    arrowlain_right,
---            mylayoutbox,
+            mylayoutbox,
         },
     }
 
