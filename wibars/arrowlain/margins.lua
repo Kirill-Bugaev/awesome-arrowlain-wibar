@@ -28,7 +28,11 @@ local margins = {
     },
     cpuload = { 
 	left = 0,
-	right = 8
+	right = 0
+    },
+    cputemp = { 
+	left = 8,
+	right = 0 
     },
     cpu = { 
 	left = 4,
@@ -36,7 +40,11 @@ local margins = {
     },
     ram = { 
 	left = 0,
-	right = 8
+	right = 0
+    },
+    systemp = { 
+	left = 8,
+	right = 0
     },
     ramsys = { 
 	left = 4,
@@ -44,7 +52,11 @@ local margins = {
     },
     fs = { 
 	left = 0,
-	right = 8
+	right = 0
+    },
+    hddtemp = { 
+	left = 8,
+	right = 0
     },
     fshdd = { 
 	left = 4,

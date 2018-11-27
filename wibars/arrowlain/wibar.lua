@@ -42,7 +42,7 @@ local function factory (args)
     local height   	= args.height or 16
     local scr 		= args.screen or awful.screen.focused() 
     local font   	= args.font or "xos4 Terminus 9"
-    local cs   		= args.cs or base16.solarized_dark
+    local cs		= args.cs or base16.solarized_dark
     local dir	 	= args.direction -- arrow direction
     if string.lower(dir) ~= "right" then dir = "left" end
     local spacer	= args.spacer
@@ -74,7 +74,7 @@ local function factory (args)
     }
     if compact then
 --	widgetsettings.spacer = ""
-	for k,v in pairs(margins) do
+	for k,_ in pairs(margins) do
 	    margins[k].left = 0
 	    margins[k].right = 2
 	end
@@ -108,7 +108,7 @@ local function factory (args)
     local ncputemp = widgets.cputemp(widgetsettings)
     local ncpu = wibox.widget {
 	wibox.container.margin(ncpuload, margins.cpuload.left, margins.cpuload.right),
-	ncputemp,
+	wibox.container.margin(ncputemp, margins.cputemp.left, margins.cputemp.right),
 	layout = wibox.layout.align.horizontal
     }
     local wcpu = arrow_wrapper(ncpu, cs.palette.barbg_red, dir, margins.cpu.left, margins.cpu.right, spacer, cs.palette.barbg_orange, false)	
@@ -117,7 +117,7 @@ local function factory (args)
     local nsystemp = widgets.systemp(widgetsettings)
     local nramsys = wibox.widget {
 	wibox.container.margin(nram, margins.ram.left, margins.ram.right),
-	nsystemp,
+	wibox.container.margin(nsystemp, margins.systemp.left, margins.systemp.right),
 	layout = wibox.layout.align.horizontal
     }
     local wramsys = arrow_wrapper(nramsys, cs.palette.barbg_orange, dir, margins.ramsys.left, margins.ramsys.right, spacer, cs.palette.barbg_green, false)	
@@ -126,7 +126,7 @@ local function factory (args)
     local nhddtemp = widgets.hddtemp(widgetsettings)
     local nfshdd = wibox.widget {
 	wibox.container.margin(nfs, margins.fs.left, margins.fs.right),
-	nhddtemp,
+	wibox.container.margin(nhddtemp, margins.hddtemp.left, margins.hddtemp.right),
 	layout = wibox.layout.align.horizontal
     }
     local wfshdd = arrow_wrapper(nfshdd, cs.palette.barbg_green, dir, margins.fshdd.left, margins.fshdd.right, spacer, cs.palette.barbg_blue, false)	
