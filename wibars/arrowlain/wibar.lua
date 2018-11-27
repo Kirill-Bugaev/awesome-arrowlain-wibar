@@ -46,7 +46,9 @@ local function factory (args)
     local dir	 	= args.direction -- arrow direction
     if string.lower(dir) ~= "right" then dir = "left" end
     local spacer	= args.spacer
+    if spacer == nil then spacer = true end
     local compact	= args.compact
+    if compact == nil then compact = false end
 
     -- make wibar
     local wibar = awful.wibar({
