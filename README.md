@@ -62,14 +62,17 @@ end)
 
 #### Configuring wibar
 
-You can custom wibar creating code above to configure wibar appearance. Just change lua table item values proper way in `arrowlain.wibar` function call. If some value is omitted then default value will be used. Here is description list of available options:
+You can customize wibar creating code above to configure wibar appearance. Just change lua table item values proper way in `arrowlain.wibar` function call. If some value is omitted then default will be used. Description list of available options is below:
 
-*  `position` (possible values are `top` or `bottom`, default value is `bottom`) set position of wibar on top or bottom of screen.
-*  `visible` (possible values are `true` or `false`, default value is `true`) set wibar visibility on Awesome screens.
-*  `height` (possible value is `any positive number`, default value is `16`) set wibar height counted from top or bottom screen border. Recommend to use default value if you don't want that wibar icons look ugly.
-*  `screen` (possible value is `*awesome_screen*`, default value is `awful.screen.focused()`) set Awesome screen on which wibar will shown. If you create wibar for each screen in `awful.screen.connect_for_each_screen` function call then set this value equal to screen variable used in argument function (`s` above).
-*  `cs` (possible value is `base16.*color_scheme_name*`, default value is `base16.solarized_dark`) set color scheme for wibar. 5 color schemes are available out of box: default light and dark, solarized light and dark, nord. You can add own color scheme or import existing from [base16][] suite.
-
+*  `position` (possible values are `top` or `bottom`, default is `bottom`) set position of wibar on top or bottom of screen.
+*  `visible` (possible values are `true` or `false`, default is `true`) set wibar visibility on Awesome screens.
+*  `height` (possible value is `*any_positive_number*`, default is `16`) set wibar height counted from top or bottom screen border. Recommend to use default value if you don't want that wibar icons look ugly.
+*  `screen` (possible value is `*awesome_screen*`, default is `awful.screen.focused()`) set Awesome screen on which wibar will shown. If you create wibar for each screen in `awful.screen.connect_for_each_screen` function call then set this value equal to screen variable used in argument function (`s` above).
+*  `cs` (possible value is `base16.*color_scheme_name*`, default is `base16.solarized_dark`) set color scheme for wibar. 5 color schemes are available out of box: default light and dark, solarized light and dark, nord. You can add your own color scheme or import existing from [base16][] suite.
+*  `font` (possible value is `*any_font_name_and_size*`, default is `xos4 Terminus 9`) set font for wibar. It is highly recommended to use Terminus font otherwise it may happen that some widgets will show notifies in not right format.
+*  `direction` (possible values are `left` or `right`, default is `left`) set arrow direction and align is opposite to `direction` option value. 
+*  `spacer` (possible values are `true` or `false`, default is `true`) set spacer between arrow widgets, see [screenshots][].
+*  `compact` (possible values are `true` or `false`, default is `false`) toggle compact mode, see [screenshots][].
 
 ### Troubleshooting
 
