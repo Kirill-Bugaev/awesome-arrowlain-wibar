@@ -67,8 +67,8 @@ You can custom wibar creating code above to configure wibar appearance. Just cha
 *  `position` (possible values are `top` or `bottom`, default value is `bottom`) set position of wibar on top or bottom of screen.
 *  `visible` (possible values are `true` or `false`, default value is `true`) set wibar visibility on Awesome screens.
 *  `height` (possible value is `any positive number`, default value is `16`) set wibar height counted from top or bottom screen border. Recommend to use default value if you don't want that wibar icons look ugly.
-*  `screen` (possible value is `_awesome_screen_`, default value is `awful.screen.focused()`) set Awesome screen on which wibar will shown. If you create wibar for each screen in `awful.screen.connect_for_each_screen` function call then set this value equal to screen variable used in argument function (`s` above).
-*  `cs` (possible value: `base16.color_scheme_name`) set color scheme for wibar. 5 color schemes available out of box
+*  `screen` (possible value is `*awesome_screen*`, default value is `awful.screen.focused()`) set Awesome screen on which wibar will shown. If you create wibar for each screen in `awful.screen.connect_for_each_screen` function call then set this value equal to screen variable used in argument function (`s` above).
+*  `cs` (possible value is `base16.*color_scheme_name*`, default value is `base16.solarized_dark`) set color scheme for wibar. 5 color schemes are available out of box: default light and dark, solarized light and dark, nord. You can add own color scheme or import existing from [base16][] suite.
 
 
 ### Troubleshooting
@@ -80,3 +80,4 @@ You can custom wibar creating code above to configure wibar appearance. Just cha
 [screenshots]: #Screenshots
 [troubleshooting]: #Troubleshooting
 [configuration]: #Configuration
+[base16]: http://chriskempson.com/projects/base16/
