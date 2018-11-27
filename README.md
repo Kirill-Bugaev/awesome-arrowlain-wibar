@@ -3,7 +3,7 @@ Wibar in arrow style with modified Lain widgets for Awesome WM
 
 This project was inspired by [lcpz/awesome-copycast][] Powerarrow theme and Vim [Powerline][] plugin. It uses modified Lain library for Awesome WM, original can be found at [lcpz/lain][].
 
-### Introduction
+## Introduction
 
 This wibar is an extension for Awesome WM which allows you to monitor system and hardware state, current weather and forecast, mailboxes, etc. See the [screenshots][] below for a demonstration of the wibar capabilities.
 
@@ -11,19 +11,19 @@ The most laborious part is configuring widgets is described in [configuration][]
 
 See the [troubleshooting][] section if you're having any issues with the wibar. 
 
-### Screenshots
+## Screenshots
 
 ![Screenshot of normal left solarized](https://github.com/Kirill-Bugaev/awesome-arrowlain-wibar/blob/master/screenshots/screenshot_normal_left_solarized.png)
 ![Screenshot of normal right nord](https://github.com/Kirill-Bugaev/awesome-arrowlain-wibar/blob/master/screenshots/screenshot_normal_right_nord.png)
 ![Screenshot of compact left default](https://github.com/Kirill-Bugaev/awesome-arrowlain-wibar/blob/master/screenshots/screenshot_compact_left_default.png)
 
-### Installation
+## Installation
 
 Clone current repository to temporary directory with `git clone https://github.com/Kirill-Bugaev/awesome-arrowlain-wibar.git`. Copy `base16`, `lainmod` and `wibars` directories from `awesome-arrowlain-wibar` directory to your Awesome WM configuration directory (`~/.config/awesome` by default).
 
-### Configuration
+## Configuration
 
-#### Adding wibar to Awesome WM screens
+### Adding wibar to Awesome WM screens
 
 1. Open your Awesome WM lua configuration file (`~/.config/awesome/rc.lua` by default) in text editor.
 
@@ -60,7 +60,7 @@ end)
 
 4. Restart Awesome.
 
-#### Configuring wibar
+### Configuring wibar
 
 You can customize wibar creating code above to configure wibar appearance. Just change lua table item values proper way in `arrowlain.wibar` function call. If some value is omitted then default will be used. Description list of available options is below:
 
@@ -74,12 +74,12 @@ You can customize wibar creating code above to configure wibar appearance. Just 
 *  `spacer` (`true` or `false`, default is `true`) set spacer between arrow widgets, see [screenshots][].
 *  `compact` (`true` or `false`, default is `false`) toggle compact mode, see [screenshots][].
 
-#### Configuring widgets
+### Configuring widgets
 
 Depending on how your system is equipped (which software are installed) some widgets may show "N/A" values. It is normal behaviour for most cases and means that you need to install necessary utilities or configure widgets manually in proper way. But in some cases it may mean that your hardware doesn't support some features, for example you could have no hdd thermometer and therefore can't measure hdd temperature or if you have desktop computer you could have no battery which is the part of laptop. Also it may be that you just don't want to see some widgets on wibar. Any way you can switch off unwanted widgets. Section below describes how to do it.
 
-##### Switching off unwanted widgets
-Open wibar lua configuration file (~/.config/awesome/wibars/arrowlain/wibar.lua by default) in text editor. Comment strokes in `factory` function which correspond creation of naked or wrapped in arrow (wrapped is better choice) widgets which you want to switch off. For example if you want to switch off battery widget you should comment stroke where widget is wrapped in arrow. Your comment should look something like this:
+#### Switching off unwanted widgets
+Open wibar lua configuration file (`~/.config/awesome/wibars/arrowlain/wibar.lua` by default) in text editor. Comment strokes (in `factory` function) which correspond creation of naked or wrapped in arrow (wrapped is better choice) widgets which you want to switch off. For example if you want to switch off battery widget you should comment stroke where widget is wrapped in arrow. Your comment should look something like this:
 
 ```lua
 ...
@@ -89,7 +89,7 @@ Open wibar lua configuration file (~/.config/awesome/wibars/arrowlain/wibar.lua 
 ...
 ```
 
-Wrapped cpu, memory and hdd widgets consist of two naked (not wrapped in arrow) widgets. First shows the load, second -- device temperature (it is a system chipset temperature in case of memory widget). For example if you want to switch off system chipset temperature widget but keep memory load widget you should comment stroke where naked system chipset temperature widget is created and corresponding stroke in lua table where it merges with memory load widget:
+Wrapped cpu, memory and hdd widgets consist of two naked widgets. First shows the load, second -- device temperature (it is a system chipset temperature in case of memory widget). For example if you want to switch off system chipset temperature widget but keep memory load widget you should comment stroke where naked system chipset temperature widget is created and corresponding stroke in lua table where it merges with memory load widget:
 
 ```lua
 ...
@@ -122,7 +122,7 @@ You may want to switch off second mail widget if you have only one mailbox. In o
 ...
 ```
 
-### Troubleshooting
+## Troubleshooting
 
 
 [lcpz/awesome-copycast]: https://github.com/lcpz/awesome-copycats
