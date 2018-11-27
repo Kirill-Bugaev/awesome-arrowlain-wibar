@@ -64,10 +64,10 @@ end)
 
 You can custom wibar creating code above to configure wibar appearance. Just change lua table item values proper way in `arrowlain.wibar` function call. If some value is omitted then default value will be used. Here is description list of available options:
 
-*  `position` (possible values are `top` or `bottom`, default value `bottom`) set position of wibar on top or bottom of screen.
-*  `visible` (possible values are `true` or `false`, default value `true`) set wibar visibility on Awesome screens.
-*  `height` (possible value is `any positive number`, default value `16`) set wibar height counted from top or bottom screen border. Recommend to use default value if you don't want that wibar icons look ugly.
-*  `screen` (possible value is `*awesome_screen*`, default value `awful.screen.focused()` set Awesome screen on which wibar will shown. If you create wibar for each screen in `awful.screen.connect_for_each_screen` function call set this value equal to screen variable used in argument function (`s` above).
+*  `position` (possible values are `top` or `bottom`, default value is `bottom`) set position of wibar on top or bottom of screen.
+*  `visible` (possible values are `true` or `false`, default value is `true`) set wibar visibility on Awesome screens.
+*  `height` (possible value is `any positive number`, default value is `16`) set wibar height counted from top or bottom screen border. Recommend to use default value if you don't want that wibar icons look ugly.
+*  `screen` (possible value is `_awesome_screen_`, default value is `awful.screen.focused()`) set Awesome screen on which wibar will shown. If you create wibar for each screen in `awful.screen.connect_for_each_screen` function call then set this value equal to screen variable used in argument function (`s` above).
 *  `cs` (possible value: `base16.color_scheme_name`) set color scheme for wibar. 5 color schemes available out of box
 
 
