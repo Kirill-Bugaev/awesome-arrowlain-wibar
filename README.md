@@ -76,7 +76,7 @@ You can customize wibar creating code above to configure wibar appearance. Just 
 
 ### Configuring widgets
 
-Depending on how your system is equipped (which software are installed) some widgets may show "N/A" values. It is normal behaviour for most cases and means that you need to install necessary utilities or configure widgets manually in proper way. But in some cases it may mean that your hardware doesn't support some features, for example you could have no hdd thermometer and therefore can't measure hdd temperature or if you have desktop computer you could have no battery which is the part of laptop. Also it may be that you just don't want to see some widgets on wibar. Any way you can switch off unwanted widgets. Section below describes how to do it.
+Depending on how your system is equipped (which software is installed) some widgets may show "N/A" values. It is normal behaviour for most cases and means that you need to install necessary utilities or configure widgets manually in proper way. But in some cases it may mean that your hardware doesn't support some features, for example you could have no hdd thermometer and therefore can't measure hdd temperature or if you have desktop computer you could have no battery which is the part of laptop. Also it may be that you just don't want to see some widgets on wibar. Any way you can switch off unwanted widgets. Section below describes how to do it.
 
 #### Switching off unwanted widgets
 Open wibar lua configuration file (`~/.config/awesome/wibars/arrowlain/wibar.lua` by default) in text editor. Comment strokes (in `factory` function) which correspond creation of naked or wrapped in arrow (wrapped is better choice) widgets which you want to switch off. For example if you want to switch off battery widget you should comment stroke where widget is wrapped in arrow. Your comment should look something like this:
@@ -121,6 +121,13 @@ You may want to switch off second mail widget if you have only one mailbox. In o
     local wmail = arrow_wrapper(nmail, cs.palette.barbrbg, dir, margins.mail.left, margins.mail.right, spacer, "alpha", false)
 ...
 ```
+
+#### Clock
+
+This widget displays current date and time. Also it shows calendar on mouse hovering.
+
+#### Weather
+This widget shows short description of current weather condition on wibar and detailed (with forecast) on mouse hovering. It requires `curl` utility have been installed on system, That can be done with `pacman -S curl` for ArchLinux.
 
 ## Troubleshooting
 
