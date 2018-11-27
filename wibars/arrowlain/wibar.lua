@@ -80,9 +80,13 @@ local function factory (args)
 	end
 	margins.kblayout.right = 0
 	margins.cpuload.right = 0
+	margins.cputemp.right = 0
 	margins.ram.right = 0
+	margins.systemp.right = 0
 	margins.fs.right = 0
-        margins.between_mailboxes.right = 0
+	margins.hddtemp.right = 0
+	margins.mail1.right = 0
+	margins.mail2.right = 0
     end
 
     -- Arrow wrapped widgets
@@ -134,12 +138,11 @@ local function factory (args)
     local nnet = widgets.net(widgetsettings)
     local wnet = arrow_wrapper(nnet, cs.palette.barbg_blue, dir, margins.net.left, margins.net.right, spacer, cs.palette.barbrbg, false)
     -- IMAP mail
-    widgetsettings.margin = margins.between_mailboxes.right
     local nmail1 = widgets.mail(widgetsettings, secrets.mail1.account, secrets.mail1.password, 1)
     local nmail2 = widgets.mail(widgetsettings, secrets.mail2.account, secrets.mail2.password, 0)
     local nmail = wibox.widget {
-	wibox.container.margin(nmail1, margins.between_mailboxes.left, margins.between_mailboxes.right),
-	nmail2,
+	wibox.container.margin(nmail1, margins.mail1.left, margins.mail1.right),
+	wibox.container.margin(nmail2, margins.mail2.left, margins.mail2.right),
 	layout = wibox.layout.align.horizontal
     }
     local wmail = arrow_wrapper(nmail, cs.palette.barbrbg, dir, margins.mail.left, margins.mail.right, spacer, "alpha", false)

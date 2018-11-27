@@ -66,9 +66,13 @@ local margins = {
 	left = 4,
 	right = 8
     },
-    between_mailboxes = { 
+    mail1 = { 
 	left = 0,
-	right = 10
+	right = 0
+    },
+    mail2 = { 
+	left = 10,
+	right = 0
     },
     mail = { 
 	left = 4,
