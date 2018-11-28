@@ -222,9 +222,17 @@ You should change device name in Lain `cputemp.lua` configuration file (`~/.conf
 
 ```lua
 ...
-    local dev		= "acpitz-virtual-0" 
+local function factory(args)
+...
+    local dev		= "*Your_CPU_thermometer*" 
+...
+end
 ...
 ``` 
+
+#### Memory 
+
+It shows memory usage and system chipset temperature. Everything that was said for [CPU][] is fair for this widget. You should change device name in Lain `systemp.lua` configuration file (`~/.config/awesome/lainmod/widget/systemp.lua` by default) in `factory` function to the one that corresponds your system chipset or [switch off][Switching off unwanted widgets] system temperature widget if you don't have such sensor.
 
 ## Troubleshooting
 
@@ -238,3 +246,4 @@ You should change device name in Lain `cputemp.lua` configuration file (`~/.conf
 [base16]: http://chriskempson.com/projects/base16/
 [OpenWeatherMap]: https://openweathermap.org/
 [Switching off unwanted widgets]: #Switching-off-unwanted-widgets
+[CPU]: #CPU
