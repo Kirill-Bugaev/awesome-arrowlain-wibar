@@ -79,6 +79,7 @@ You can customize wibar creating code above to configure wibar appearance. Just 
 Depending on how your system is equipped (which software is installed) some widgets may show "N/A" values. It is normal behaviour for most cases and means that you need to install necessary utilities or configure widgets manually in proper way. But in some cases it may mean that your hardware doesn't support some features, for example you could have no hdd thermometer and therefore can't measure hdd temperature or if you have desktop computer you could have no battery which is the part of laptop. Also it may be that you just don't want to see some widgets on wibar. Any way you can switch off unwanted widgets. Section below describes how to do it.
 
 #### Switching off unwanted widgets
+
 Open wibar lua configuration file (`~/.config/awesome/wibars/arrowlain/wibar.lua` by default) in text editor. Comment strokes (in `factory` function) which correspond creation of naked or wrapped in arrow (wrapped is better choice) widgets which you want to switch off. For example if you want to switch off battery widget you should comment stroke where widget is wrapped in arrow. Your comment should look something like this:
 
 ```lua
@@ -127,6 +128,7 @@ You may want to switch off second mail widget if you have only one mailbox. In o
 This widget displays current date and time. Also it shows calendar on mouse hovering.
 
 #### Weather
+
 This widget shows short description of current weather condition on wibar and detailed (with forecast) on mouse hovering. It requires `curl` utility have been installed on system, that can be done with `pacman -S curl` for ArchLinux, although `curl` is included in `base` package group and should be installed by default during the system installation.
 
 Weather widget uses [OpenWeatherMap][] service to receive current weather condition and forecast. So OpenWeatherMap  API key is required. Widget already has one, but you can get yours and use it. Visit <https://openweathermap.org/appid> to get API key. Then change existing in `secrets.lua` configuration file (`~/.config/awesome/wibars/arrowlain/secrets.lua` by default):
@@ -134,7 +136,7 @@ Weather widget uses [OpenWeatherMap][] service to receive current weather condit
 ```lua
 ...
     -- OpenWeatherMap API key - https://openweathermap.org/appid
-    openweather_api_key = "YOUR_API_KEY",
+    openweather_api_key = "*YOUR_API_KEY*",
 ...
 ```
 
@@ -146,11 +148,15 @@ In order to widget shows weather in your place you should change `city_id` in `w
         -- Novosibirsk	1496747
         -- Bratsk	2051523
 	APPID = secrets.openweather_api_key, 
-        city_id = YOUR_CITY_ID,
+        city_id = *YOUR_CITY_ID*,
         followtag = true,
 ...
 ```
-To know your `city_id` visit <https://openweathermap.org/find>, enter your city name in search field, tap <Enter>, choose your city from appeared list. `city_id` will the number in URL like this: `https://openweathermap.org/city/*2643743*`.
+To know your `city_id` visit <https://openweathermap.org/find>, enter your city name in search field, tap Enter, choose your city from appeared list. `city_id` will the number in URL like this: `https://openweathermap.org/city/*2643743*`.
+
+### Battery
+
+This widget shows laptop battery status. If you don't have battery it may be useless. So you can switch it off. See [Switching off unwanted widgets][] section.
 
 ## Troubleshooting
 
@@ -163,3 +169,4 @@ To know your `city_id` visit <https://openweathermap.org/find>, enter your city 
 [configuration]: #Configuration
 [base16]: http://chriskempson.com/projects/base16/
 [OpenWeatherMap]: https://openweathermap.org/
+[Switching off unwanted widgets]: #Switching off unwanted widgets
