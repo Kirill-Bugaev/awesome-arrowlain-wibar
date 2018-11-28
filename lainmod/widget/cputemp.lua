@@ -11,15 +11,17 @@ local wibox    = require("wibox")
 local open     = io.open
 local tonumber = tonumber
 
--- coretemp
--- lain.widget.temp
+-- cputemp
+-- lainmod.widget.cputemp
 
 local function factory(args)
-    local temp     = { widget = wibox.widget.textbox() }
-    local args     = args or {}
-    local timeout  = args.timeout or 2
+    local temp		= { widget = wibox.widget.textbox() }
+    local args		= args or {}
+    local timeout	= args.timeout or 2
 --    local tempfile = args.tempfile or "/sys/class/thermal/thermal_zone0/temp"
-    local settings = args.settings or function() end
+    local settings	= args.settings or function() end
+
+    local dev		= "k10temp-pci-00c3" 
 
     function temp.update()
 --[[        local f = open(tempfile)
@@ -29,13 +31,13 @@ local function factory(args)
         else
             coretemp_now = "N/A"
         end	]]--
-	local sensors_cmd = "bash -c '/usr/bin/sensors -A k10temp-pci-00c3 | grep temp1 | cut -c16-19'" 
-	awful.spawn.easy_async(sensors_cmd, function(stdout, stderr, reason, exit_code)
+	local sensors_cmd = "/usr/bin/sensors -A " .. dev .. " | grep temp1 | cut -c16-19"
+	helpers.async_with_shell(sensors_cmd, function(stdout, exit_code)
 	    local coretemp_now = tonumber(stdout)
 	    if (exit_code ~= 0) or (coretemp_now == nil) then coretemp_now = "N/A" end
             local widget = temp.widget
             settings(widget, coretemp_now)
-	end)
+        end)
     end
 
     helpers.newtimer("coretemp", timeout, temp.update)

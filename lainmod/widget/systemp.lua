@@ -21,6 +21,8 @@ local function factory(args)
 --    local tempfile = args.tempfile or "/sys/class/thermal/thermal_zone0/temp"
     local settings = args.settings or function() end
 
+    local dev		= "acpitz-virtual-0" 
+
     function temp.update()
 --[[        local f = open(tempfile)
         if f then
@@ -29,8 +31,8 @@ local function factory(args)
         else
             coretemp_now = "N/A"
         end	]]--
-	local sensors_cmd = "bash -c '/usr/bin/sensors -A acpitz-virtual-0 | grep temp1 | cut -c16-19'" 
-	awful.spawn.easy_async(sensors_cmd, function(stdout, stderr, reason, exit_code)
+	local sensors_cmd = "/usr/bin/sensors -A " .. dev .. " | grep temp1 | cut -c16-19"
+	helpers.async_with_shell(sensors_cmd, function(stdout, exit_code)
 	    local systemp_now = tonumber(stdout)
 	    if (exit_code ~= 0) or (systemp_now == nil) then systemp_now = "N/A" end
             local widget = temp.widget
