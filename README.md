@@ -30,11 +30,13 @@ Clone current repository to temporary directory with `git clone https://github.c
 2. Include required modules by adding the following strings to the beginning:
 
 ```lua
+...
 -- My color schemes
 local base16 = require("base16")
 -- My wibars
 local wibars = require("wibars")
 local arrowlain = wibars.arrowlain
+...
 ```
 
 3. Find `awful.screen.connect_for_each_screen` function call and add the code which will create wibar for each Awesome screen to the end of function described in parameters. It should look something like this:
@@ -224,7 +226,7 @@ You should change device name in Lain `cputemp.lua` configuration file (`~/.conf
 ...
 local function factory(args)
 ...
-    local dev		= "*Your_CPU_thermometer*" 
+    local dev = "*Your_CPU_thermometer*" 
 ...
 end
 ...
@@ -240,7 +242,7 @@ This widget shows `/` (by default) partition usage and HDD temperature on wibar 
 
 ```lua
 ...
-            widget:set_markup(markup.fontfg(font, fg, spacer .. string.format("%s", fs_now["*YOUR_PARTITION*"].percentage) .. "%"))
+    widget:set_markup(markup.fontfg(font, fg, spacer .. string.format("%s", fs_now["*YOUR_PARTITION*"].percentage) .. "%"))
 ...
 ```
 
@@ -252,7 +254,8 @@ It shows incoming and outcoming net traffic.
 
 #### Mail
 
-This widget shows unread messages in your mailboxes and open it in browser on mouse click. You should enter mail accounts and passwords in `secrets.lua` configuration file (`~/.config/awesome/wibars/arrowlain/secrets.lua` by default):
+This widget shows unread messages in your mailboxes and open it in browser on mouse click. It use `curl` utility for recieving number of unread messages. You can install `curl` with `# pacman -S curl` for ArchLinux, although `curl` is included in `base` package group and should be installed by default during the system installation.
+In order to widget works proper way you should enter mail accounts and passwords in `secrets.lua` configuration file (`~/.config/awesome/wibars/arrowlain/secrets.lua` by default):
 
 ```lua
 ...
@@ -271,7 +274,7 @@ You should also set `awful.util.browser` variable (in `rc.lua` eg) to value of y
 
 ```lua
 ...
-awful.util.browser = "firefox"
+    awful.util.browser = "firefox"
 ...
 ```
 
@@ -279,9 +282,11 @@ Widget is configured by default to open GMail mailboxes in browser. To use anoth
 
 ```lua
 ...
-		    string.format("%s --target window https://mail.google.com/mail/u/%s/", browser, boxnumber)
+    string.format("%s --target window https://mail.google.com/mail/u/%s/", browser, boxnumber)
 ...
 ```
+
+If you have only one mailbox you may want to switch off second widget, see [switching off unwanted widgets][] section.
 
 ## Troubleshooting
 
