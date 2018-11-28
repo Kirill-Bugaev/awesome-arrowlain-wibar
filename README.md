@@ -127,7 +127,15 @@ You may want to switch off second mail widget if you have only one mailbox. In o
 This widget displays current date and time. Also it shows calendar on mouse hovering.
 
 #### Weather
-This widget shows short description of current weather condition on wibar and detailed (with forecast) on mouse hovering. It requires `curl` utility have been installed on system, That can be done with `pacman -S curl` for ArchLinux.
+This widget shows short description of current weather condition on wibar and detailed (with forecast) on mouse hovering. It requires `curl` utility have been installed on system, that can be done with `pacman -S curl` for ArchLinux, although `curl` is included in `base` package group and should be installed by default during the system installation.
+
+Weather widget uses [OpenWeatherMap][] service to receive current weather condition and forecast. So OpenWeatherMap  API key is required. Widget already has one, but you can get yours and use it. Visit <https://openweathermap.org/appid> to get API key. Then change existing in secrets.lua configuration file (`~/.config/awesome/wibars/arrowlain/secrets.lua` by default):
+```lua
+...
+    -- OpenWeatherMap API key - https://openweathermap.org/appid
+    openweather_api_key = "YOUR_API_KEY",
+...
+```
 
 ## Troubleshooting
 
@@ -139,3 +147,4 @@ This widget shows short description of current weather condition on wibar and de
 [troubleshooting]: #Troubleshooting
 [configuration]: #Configuration
 [base16]: http://chriskempson.com/projects/base16/
+[OpenWeatherMap]: https://openweathermap.org/
