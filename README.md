@@ -205,7 +205,8 @@ It shows current keyboard layout on system. Layout can be changed by clicking on
 
 #### CPU
 
-This widget shows CPU usage and temperature. You shouldn't have a problem with CPU usage unlike temperature. Original [lcpz/lain][] library uses `/sys/class/thermal/thermal_zone0/temp` system file to determine CPU temperature, but I was forced to change such behaviour because this file is responsible for system chipset temperature on my system. I prefer to use `lm_sensors` utility to determine device temperatures and it is required for cpu and memory widgets work proper way. You can install `lm_sensors` with `# pacman -S lm_sensors` for ArchLinux. Run `$ sensors` in command line to see which devices are available:
+This widget shows CPU usage and temperature. You shouldn't have a problem with CPU usage unlike temperature. Original [lcpz/lain][] library uses `/sys/class/thermal/thermal_zone0/temp` system file to determine CPU temperature, but I was forced to change such behaviour because this file is responsible for system chipset temperature on my system. I prefer to use `lm_sensors` utility to determine device temperatures and it is required for cpu and memory widgets work proper way. You can install `lm_sensors` with `# pacman -S lm_sensors` for ArchLinux. Run `$ sensors` in terminal to see which devices are available:
+
 ```shell
 $ sensors
 acpitz-virtual-0	# This is device name
@@ -217,7 +218,13 @@ Adapter: PCI adapter
 temp1:        +69.5°C  (high = +70.0°C)
 ```
 
- Then you should make changes in Lain cputemp.lua configuration file (`~/.config/awesome/lainmod/widget/cputemp.lua` by default). 
+You should change device name in Lain `cputemp.lua` configuration file (`~/.config/awesome/lainmod/widget/cputemp.lua` by default) in `factory` function to the one that corresponds your CPU:
+
+```lua
+...
+    local dev		= "acpitz-virtual-0" 
+...
+``` 
 
 ## Troubleshooting
 
