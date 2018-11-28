@@ -230,9 +230,58 @@ end
 ...
 ``` 
 
-#### Memory 
+#### Memory and system chipset temperature
 
-It shows memory usage and system chipset temperature. Everything that was said for [CPU][] is fair for this widget. You should change device name in Lain `systemp.lua` configuration file (`~/.config/awesome/lainmod/widget/systemp.lua` by default) in `factory` function to the one that corresponds your system chipset or [switch off][Switching off unwanted widgets] system temperature widget if you don't have such sensor.
+It shows memory usage and system chipset temperature. Everything that was said for [CPU temperature widget][CPU] is fair for this widget too. You should change device name in Lain `systemp.lua` configuration file (`~/.config/awesome/lainmod/widget/systemp.lua` by default) in `factory` function to the one that corresponds your system chipset or [switch off][Switching off unwanted widgets] chipset temperature widget if you don't have such sensor.
+
+#### File system and HDD temperature
+
+This widget shows `/` (by default) partition usage and HDD temperature on wibar and detailed partitions usage on mouse hovering. To change partition displayed on wibar you should change value in `fs.lua` configuration file (`~/.config/awesome/wibars/arrowlain/widgets/fs.lua` by default):
+
+```lua
+...
+            widget:set_markup(markup.fontfg(font, fg, spacer .. string.format("%s", fs_now["*YOUR_PARTITION*"].percentage) .. "%"))
+...
+```
+
+HDD temperature widget requires `hddtemp` and `GNU NetCat` utilities have been installed. You can do it with `# pacman -S hddtemp gnu-netcat` for ArchLinux. Also you need enable and start hddtemp systemd service with `# systemctl enable hddtemp` and `# systemctl start hddtemp`. If widget still doesn't work proper way you can switch it off, see [switching off unwanted widgets] section.
+
+#### Net
+
+It shows incoming and outcoming net traffic.
+
+#### Mail
+
+This widget shows unread messages in your mailboxes and open it in browser on mouse click. You should enter mail accounts and passwords in `secrets.lua` configuration file (`~/.config/awesome/wibars/arrowlain/secrets.lua` by default):
+
+```lua
+...
+    -- Mail accounts
+    mail1 = {
+        account  = "firts_mail@gmail.com",
+        password = "first_mail_password"
+    },
+    mail2 = {
+        account  = "second_mail@gmail.com",
+        password = "second_mail_password"
+    }
+...
+```
+You should also set `awful.util.browser` variable (in `rc.lua` eg) to value of your browser launch command (`"firefox"` eg):
+
+```lua
+...
+awful.util.browser = "firefox"
+...
+```
+
+Widget is configured by default to open GMail mailboxes in browser. To use another mail service you should change URL string in `mail.lua` configuration file (`~/.config/awesome/wibars/arrowlain/widgets/mail.lua`) in `om_table` function:
+
+```lua
+...
+		    string.format("%s --target window https://mail.google.com/mail/u/%s/", browser, boxnumber)
+...
+```
 
 ## Troubleshooting
 
