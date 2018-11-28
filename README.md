@@ -169,4 +169,4 @@ This widget shows laptop battery status. If you don't have battery it may be use
 [configuration]: #Configuration
 [base16]: http://chriskempson.com/projects/base16/
 [OpenWeatherMap]: https://openweathermap.org/
-[Switching off unwanted widgets]: #Switching off unwanted widgets
+[Switching off unwanted widgets]: #Switching_off_unwanted_widgets
