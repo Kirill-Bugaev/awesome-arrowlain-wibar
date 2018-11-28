@@ -129,7 +129,7 @@ This widget displays current date and time. Also it shows calendar on mouse hove
 
 #### Weather
 
-This widget shows short description of current weather condition on wibar and detailed (with forecast) on mouse hovering. It requires `curl` utility have been installed on system, that can be done with `pacman -S curl` for ArchLinux, although `curl` is included in `base` package group and should be installed by default during the system installation.
+This widget shows short description of current weather condition on wibar and detailed (with forecast) on mouse hovering. It requires `curl` utility has been installed on system, that can be done with `# pacman -S curl` for ArchLinux, although `curl` is included in `base` package group and should be installed by default during the system installation.
 
 Weather widget uses [OpenWeatherMap][] service to receive current weather condition and forecast. So OpenWeatherMap  API key is required. Widget already has one, but you can get yours and use it. Visit <https://openweathermap.org/appid> to get API key. Then change existing in `secrets.lua` configuration file (`~/.config/awesome/wibars/arrowlain/secrets.lua` by default):
 
@@ -145,18 +145,59 @@ In order to widget shows weather in your place you should change `city_id` in `w
 ```lua
 ...
     local weather = lainmod.widget.weather({
+	APPID = secrets.openweather_api_key, 
         -- Novosibirsk	1496747
         -- Bratsk	2051523
-	APPID = secrets.openweather_api_key, 
         city_id = *YOUR_CITY_ID*,
         followtag = true,
 ...
 ```
 To know your `city_id` visit <https://openweathermap.org/find>, enter your city name in search field, tap Enter, choose your city from appeared list. `city_id` will the number in URL like this: `https://openweathermap.org/city/*2643743*`.
 
-### Battery
+#### Battery
 
-This widget shows laptop battery status. If you don't have battery it may be useless. So you can switch it off. See [Switching off unwanted widgets][] section.
+It shows laptop battery status and popup messages when battery status has been changed. If you don't have battery it may be useless. So you can switch it off, see [Switching off unwanted widgets][] section.
+
+#### Volume
+
+This widget shows current volume level on system. It requires `amixer` has been installed on system, that can be done with `# pacman -S alsa-utils` for ArchLinux. Also in order to have permission to mixer it may be required to add user to `audio` group, that can be done with `# gpasswd -a *user_name* audio`.
+
+You can add Awesome key bindings to change volume level. In order to do this open Awesome `rc.lua` configuration file (`~/.config/awesome/rc.lua` by default) and add following strings to  `globalkeys = gears.table.join()` function call:
+
+```lua
+...
+modkey	= "Mod4"
+altkey	= "Mod1"
+globalkeys = gears.table.join(
+...
+    	-- ALSA volume control
+    	awful.key({ modkey, altkey }, "Up",
+            function ()
+            	os.execute(string.format("amixer -q set %s 5%%+", myvolume.channel))
+            	myvolume.update()
+            end,
+            {description = "volume up", group = "Volume"}
+        ),
+    	awful.key({ modkey, altkey }, "Down",
+            function ()
+                os.execute(string.format("amixer -q set %s 5%%-", myvolume.channel))
+                myvolume.update()
+            end,
+            {description = "volume down", group = "Volume"}
+    	),
+    	awful.key({}, "XF86AudioMute",
+            function ()
+                os.execute(string.format("amixer -q set %s toggle", myvolume.togglechannel or myvolume.channel))
+                myvolume.update()
+            end,
+            {description = "mute toggle", group = "Volume"}
+    	),
+...
+)
+...
+``` 
+
+Now you can change volume level with Mod4-Alt-ArrowUp and Mod4-Alt-ArrowDown key combinations and mute with your keyboard MuteAudio key.
 
 ## Troubleshooting
 
