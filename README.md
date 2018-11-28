@@ -129,13 +129,28 @@ This widget displays current date and time. Also it shows calendar on mouse hove
 #### Weather
 This widget shows short description of current weather condition on wibar and detailed (with forecast) on mouse hovering. It requires `curl` utility have been installed on system, that can be done with `pacman -S curl` for ArchLinux, although `curl` is included in `base` package group and should be installed by default during the system installation.
 
-Weather widget uses [OpenWeatherMap][] service to receive current weather condition and forecast. So OpenWeatherMap  API key is required. Widget already has one, but you can get yours and use it. Visit <https://openweathermap.org/appid> to get API key. Then change existing in secrets.lua configuration file (`~/.config/awesome/wibars/arrowlain/secrets.lua` by default):
+Weather widget uses [OpenWeatherMap][] service to receive current weather condition and forecast. So OpenWeatherMap  API key is required. Widget already has one, but you can get yours and use it. Visit <https://openweathermap.org/appid> to get API key. Then change existing in `secrets.lua` configuration file (`~/.config/awesome/wibars/arrowlain/secrets.lua` by default):
+
 ```lua
 ...
     -- OpenWeatherMap API key - https://openweathermap.org/appid
     openweather_api_key = "YOUR_API_KEY",
 ...
 ```
+
+In order to widget shows weather in your place you should change `city_id` in `weather.lua` configuration file (`~/.config/awesome/wibars/arrowlain/widgets/weather.lua` by default):
+
+```lua
+...
+    local weather = lainmod.widget.weather({
+        -- Novosibirsk	1496747
+        -- Bratsk	2051523
+	APPID = secrets.openweather_api_key, 
+        city_id = YOUR_CITY_ID,
+        followtag = true,
+...
+```
+To know your `city_id` visit <https://openweathermap.org/find>, enter your city name in search field, tap <Enter>, choose your city from appeared list. `city_id` will the number in URL like this: `https://openweathermap.org/city/*2643743*`.
 
 ## Troubleshooting
 
