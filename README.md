@@ -156,7 +156,7 @@ To know your `city_id` visit <https://openweathermap.org/find>, enter your city 
 
 #### Battery
 
-It shows laptop battery status and popup messages when battery status has been changed. If you don't have battery it may be useless. So you can switch it off, see [Switching off unwanted widgets][] section.
+It shows laptop battery status and popup messages when battery status has been changed. If you don't have a battery it may be useless. So you can switch it off, see [Switching off unwanted widgets][] section.
 
 #### Volume
 
@@ -198,6 +198,26 @@ globalkeys = gears.table.join(
 ``` 
 
 Now you can change volume level with Mod4-Alt-ArrowUp and Mod4-Alt-ArrowDown key combinations and mute with your keyboard MuteAudio key.
+
+#### Keyboard layout
+
+It shows current keyboard layout on system. Layout can be changed by clicking on widget.
+
+#### CPU
+
+This widget shows CPU usage and temperature. You shouldn't have a problem with CPU usage unlike temperature. Original [lcpz/lain][] library uses `/sys/class/thermal/thermal_zone0/temp` system file to determine CPU temperature, but I was forced to change such behaviour because this file is responsible for system chipset temperature on my system. I prefer to use `lm_sensors` utility to determine device temperatures and it is required for cpu and memory widgets work proper way. You can install `lm_sensors` with `# pacman -S lm_sensors` for ArchLinux. Run `$ sensors` in command line to see which devices are available:
+```shell
+$ sensors
+acpitz-virtual-0	# This is device name
+Adapter: Virtual device
+temp1:        +60.0°C  (crit = +105.0°C)
+
+k10temp-pci-00c3	# This is device name
+Adapter: PCI adapter
+temp1:        +69.5°C  (high = +70.0°C)
+```
+
+ Then you should make changes in Lain cputemp.lua configuration file (`~/.config/awesome/lainmod/widget/cputemp.lua` by default). 
 
 ## Troubleshooting
 
