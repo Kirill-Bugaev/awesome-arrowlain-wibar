@@ -84,44 +84,38 @@ Depending on how your system is equipped (which software is installed) some widg
 Open `wibar.lua` configuration file (`~/.config/awesome/wibars/arrowlain/wibar.lua` by default) in text editor. Comment strokes in `factory` function which correspond creation of naked or wrapped in arrow (wrapped is better choice) widgets which you want to switch off. For example if you want to switch off battery widget you should comment stroke which wraps widget in arrow. Your comment should look something like this:
 
 ```lua
-...
-    -- Battery
-    local nbattery = widgets.battery(widgetsettings)
---    local wbattery = arrow_wrapper(nbattery, cs.palette.barbg_violet, dir, margins.battery.left, margins.battery.right, spacer, cs.palette.barbg_yellow, false)	
-...
+-- Battery
+local nbattery = widgets.battery(widgetsettings)
+-- local wbattery = arrow_wrapper(nbattery, cs.palette.barbg_violet, dir, margins.battery.left, margins.battery.right, spacer, cs.palette.barbg_yellow, false)	
 ```
 
 Wrapped cpu, memory and hdd widgets consist of two naked widgets. First shows the load, second -- device temperature (it is a system chipset temperature in case of memory widget). For example if you want to switch off system chipset temperature widget but keep memory load widget you should comment stroke where naked system chipset temperature widget is created and corresponding stroke in lua table where it merges with memory load widget:
 
 ```lua
-...
-    -- RAM and system temperature
-    local nram = widgets.ram(widgetsettings)
---    local nsystemp = widgets.systemp(widgetsettings)
-    local nramsys = wibox.widget {
-	wibox.container.margin(nram, margins.ram.left, margins.ram.right),
---	wibox.container.margin(nsystemp, margins.systemp.left, margins.systemp.right),
-	layout = wibox.layout.align.horizontal
-    }
-    local wramsys = arrow_wrapper(nramsys, cs.palette.barbg_orange, dir, margins.ramsys.left, margins.ramsys.right, spacer, cs.palette.barbg_green, false)	
-...
+-- RAM and system temperature
+local nram = widgets.ram(widgetsettings)
+-- local nsystemp = widgets.systemp(widgetsettings)
+local nramsys = wibox.widget {
+    wibox.container.margin(nram, margins.ram.left, margins.ram.right),
+--  wibox.container.margin(nsystemp, margins.systemp.left, margins.systemp.right),
+    layout = wibox.layout.align.horizontal
+}
+local wramsys = arrow_wrapper(nramsys, cs.palette.barbg_orange, dir, margins.ramsys.left, margins.ramsys.right, spacer, cs.palette.barbg_green, false)	
 ```
 Cpu and hdd temperature widgets can be switched off the same way.
 
 You may want to switch off second mail widget if you have only one mailbox. In order to do this comment stroke where naked second mail widget is created and corresponding stroke in lua table where it merges with first mail widget:
 
 ```lua
-...
-    -- IMAP mail
-    local nmail1 = widgets.mail(widgetsettings, secrets.mail1.account, secrets.mail1.password, 1)
---    local nmail2 = widgets.mail(widgetsettings, secrets.mail2.account, secrets.mail2.password, 0)
-    local nmail = wibox.widget {
-	wibox.container.margin(nmail1, margins.mail1.left, margins.mail1.right),
---	wibox.container.margin(nmail2, margins.mail2.left, margins.mail2.right),
-	layout = wibox.layout.align.horizontal
-    }
-    local wmail = arrow_wrapper(nmail, cs.palette.barbrbg, dir, margins.mail.left, margins.mail.right, spacer, "alpha", false)
-...
+-- IMAP mail
+local nmail1 = widgets.mail(widgetsettings, secrets.mail1.account, secrets.mail1.password, 1)
+-- local nmail2 = widgets.mail(widgetsettings, secrets.mail2.account, secrets.mail2.password, 0)
+local nmail = wibox.widget {
+    wibox.container.margin(nmail1, margins.mail1.left, margins.mail1.right),
+--  wibox.container.margin(nmail2, margins.mail2.left, margins.mail2.right),
+    layout = wibox.layout.align.horizontal
+}
+local wmail = arrow_wrapper(nmail, cs.palette.barbrbg, dir, margins.mail.left, margins.mail.right, spacer, "alpha", false)
 ```
 
 #### Clock
