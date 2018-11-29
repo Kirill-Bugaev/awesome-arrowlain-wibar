@@ -254,7 +254,7 @@ It shows incoming and outcoming net traffic.
 
 #### Mail
 
-This widget shows unread messages in your mailboxes and open it in browser on mouse click. It use `curl` utility for recieving number of unread messages. You can install `curl` with `# pacman -S curl` for ArchLinux, although `curl` is included in `base` package group and should be installed by default during the system installation.
+This widget shows unread messages in your mailboxes and open mailboxes in browser on mouse click. Also it shows popup messages when new mail is recieved.  It use `curl` utility for recieving number of unread messages. You can install `curl` with `# pacman -S curl` for ArchLinux, although `curl` is included in `base` package group and should be installed by default during the system installation.
 In order to widget works proper way you should enter mail accounts and passwords in `secrets.lua` configuration file (`~/.config/awesome/wibars/arrowlain/secrets.lua` by default):
 
 ```lua
@@ -288,8 +288,47 @@ Widget is configured by default to open GMail mailboxes in browser. To use anoth
 
 If you have only one mailbox you may want to switch off second widget, see [switching off unwanted widgets][] section.
 
+#### Bonus: Samba and QEMU
+
+This naked (not wrapped in arrow) widgets show corresponding icons on wibar when Samba server or QEMU virtual machine is running.
+
+#### Adding your widgets to wibar
+
+You can add your widget (wrapped in arrow or naked) on wibar. Just add Lua varible is corresponding to widget in `wt` widget table in `wibar.lua` configuration file (`~/.config/awesome/wibars/arrowlain/wibar.lua` by default):
+
+```lua
+...
+    local wt = {
+	wclock,
+	wweather,
+	wbattery,
+	wvolume,
+	wkblayout,
+	wcpu,
+	wramsys,
+	wfshdd,
+	wnet,
+	wmail,
+	*your_wrapped_widget*,
+	nsmb,
+	nqemu,
+	*your_naked_widget*
+    }
+...
+```
+To wrap widget in arrow use `arrow_wrapper()` function in `wibar.lua` before adding widget to `wt` table:
+
+```lua
+...
+    local *wrapped_widget* = arrow_wrapper(*naked_widget*, *arrow_color*, dir, *left_margin*, *right_margin*, spacer, *next_arrow_color*, false)
+...
+```
+
 ## Troubleshooting
 
+### Wibar takes to much space on screen (not all widgets fit on wibar)
+
+Try to disable spacer between widgets and/or use compact mode, see [Configuring wibar][] section. Also [switch off unwanted widgets][Switching off unwanted widgets].
 
 [lcpz/awesome-copycast]: https://github.com/lcpz/awesome-copycats
 [Powerline]: https://github.com/powerline/powerline
@@ -301,3 +340,5 @@ If you have only one mailbox you may want to switch off second widget, see [swit
 [OpenWeatherMap]: https://openweathermap.org/
 [Switching off unwanted widgets]: #Switching-off-unwanted-widgets
 [CPU]: #CPU
+[Configuring wibar]: #Configuring-wibar
+
