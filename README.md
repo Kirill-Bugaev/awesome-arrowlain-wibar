@@ -309,6 +309,8 @@ local *wrapped_widget* = arrow_wrapper(*naked_widget*, *arrow_color*, dir, *left
 
 Try to disable spacer between widgets and/or use compact mode, see [Configuring wibar][] section. Also [switch off unwanted widgets][Switching off unwanted widgets].
 
+If you have any other issues and you can't find the answer in description above, please write me on kirill.bugaev87@gmail.com.
+
 [lcpz/awesome-copycast]: https://github.com/lcpz/awesome-copycats
 [Powerline]: https://github.com/powerline/powerline
 [lcpz/lain]: https://github.com/lcpz/lain
