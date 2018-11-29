@@ -295,7 +295,7 @@ local wt = {
     ...
     *your_naked_widget*,
     ...
-    }
+}
 ```
 To wrap widget in arrow use `arrow_wrapper()` function in `wibar.lua` before adding widget to `wt` table:
 
