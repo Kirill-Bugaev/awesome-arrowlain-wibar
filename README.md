@@ -202,7 +202,7 @@ This widget shows CPU usage and temperature. You shouldn't have a problem with C
 
 ```shell
 $ sensors
-acpitz-virtual-0	# This is system thermometer device name
+acpitz-virtual-0	# This is some thermometer device name
 Adapter: Virtual device
 temp1:        +60.0°C  (crit = +105.0°C)
 
