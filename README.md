@@ -198,7 +198,7 @@ It shows current keyboard layout. Layout can be changed by clicking on widget.
 
 #### CPU
 
-This widget shows CPU usage and temperature. You shouldn't have a problem with CPU usage unlike temperature. Original [lcpz/lain][] library uses `/sys/class/thermal/thermal_zone0/temp` system file to determine CPU temperature, but I was forced to change such behaviour because this file is responsible for system chipset temperature on my system. I prefer to use `lm_sensors` utility to determine device temperatures and it is required for cpu and memory widgets work proper way. You can install `lm_sensors` with `pacman -S lm_sensors` command for ArchLinux. Run `sensors` command in terminal to see which devices are available:
+This widget shows CPU usage and temperature. You shouldn't have a problem with CPU usage unlike temperature. Original [lcpz/lain][] library uses `/sys/class/thermal/thermal_zone0/temp` system file to determine CPU temperature, but I was forced to change such behaviour because this file is responsible for virtual device temperature on my system. I prefer to use `lm_sensors` utility to determine device temperatures and it is required for cpu and memory widgets work proper way. You can install `lm_sensors` with `pacman -S lm_sensors` command for ArchLinux. Run `sensors` command in terminal to see which devices are available:
 
 ```shell
 $ sensors
