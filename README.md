@@ -19,6 +19,8 @@ See [troubleshooting][] section if you're having any issues with wibar.
 
 ## Installation
 
+*awesome-arrowlain-wibar requires my [awesome-lainmod][] lua library and [awesome-base16][] color schemes suite which are separately distributed. You need to install them first.*
+
 Clone current repository to temporary directory with `git clone https://github.com/Kirill-Bugaev/awesome-arrowlain-wibar.git`. Copy `base16`, `lainmod` and `wibars` directories from `awesome-arrowlain-wibar` directory to your Awesome WM configuration directory (`~/.config/awesome` by default).
 
 ## Configuration
@@ -311,6 +313,8 @@ If you have any other issues and you can't find the answer in description above,
 [Terminus]: https://aur.archlinux.org/packages/terminus-font-ttf/
 [screenshots]: #Screenshots
 [troubleshooting]: #Troubleshooting
+[awesome-lainmod]: https://github.com/Kirill-Bugaev/awesome-lainmod
+[awesome-base16]: https://github.com/Kirill-Bugaev/awesome-base16
 [configuration]: #Configuration
 [base16]: http://chriskempson.com/projects/base16/
 [OpenWeatherMap]: https://openweathermap.org/
