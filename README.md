@@ -19,7 +19,7 @@ See [troubleshooting][] section if you're having any issues with wibar.
 
 ## Installation
 
-*awesome-arrowlain-wibar requires my [awesome-lainmod][] lua library and [awesome-base16][] color schemes suite which are separately distributed. You need to install them first.*
+*awesome-arrowlain-wibar requires [awesome-lainmod][] lua library and [awesome-base16][] color schemes suite which are separately distributed. You need to install them first.*
 
 Clone current repository to temporary directory with `git clone https://github.com/Kirill-Bugaev/awesome-arrowlain-wibar.git`. Copy `wibars` directory from `awesome-arrowlain-wibar` directory to your Awesome WM configuration directory (`~/.config/awesome` by default).
 
