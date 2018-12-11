@@ -48,7 +48,7 @@ local function factory (args, account, password, mailbox_number)
         password = password,
         notify   = "on",
 	followtag = true,
-	icon = cs.paths.mailicon,
+	icon = cs.paths.icons_path .. "mail.png",
         notification_preset = notification_preset,	-- default
         settings = function(widget, mailcount)
             if mailcount == 0 then
