@@ -72,7 +72,7 @@ You can customize wibar creating code above to configure wibar appearance. Just 
 *  `height` (`*positive_number*`, default is `16`) sets wibar height counted from top or bottom screen border. I recommend to use default value if you don't want that wibar icons look ugly.
 *  `screen` (`*awesome_screen*`, default is `awful.screen.focused()`) sets Awesome screen on which wibar will shown. If you create wibar for each screen in `awful.screen.connect_for_each_screen` function call then set this value equal to screen variable used in argument function (`s` above).
 *  `cs` (`base16.*color_scheme_name*`, default is `base16.solarized_dark`) sets color scheme for wibar. 5 color schemes are available out of box: default light and dark, solarized light and dark, nord. You can add your own color scheme or import existing from [base16][] suite.
-*  `font` (`*font_name_and_size*`, default is `xos4 Terminus 9`) sets font for wibar. It is highly recommended to use Terminus font otherwise it may happen that some widgets will show notifies in not right format. If you don't have Terminus font on your system you should [install one][Terminus] from AUR repository for ArchLinux.
+*  `font` (`*font_name_and_size*`, default is `xos4 Terminus 9`) sets font for wibar. It is highly recommended to use Terminus font otherwise it may happen that some widgets will show notifies in not right format. If you don't have Terminus font on your system you can [install one][Terminus] from ArchLinux repositories.
 *  `direction` (`left` or `right`, default is `left`) sets arrow direction and align (opposite to value). 
 *  `spacer` (`true` or `false`, default is `true`) sets spacer between arrow widgets, see [screenshots][].
 *  `compact` (`true` or `false`, default is `false`) toggles compact mode, see [screenshots][].
@@ -310,7 +310,7 @@ If you have any other issues and you can't find the answer in description above,
 [lcpz/awesome-copycast]: https://github.com/lcpz/awesome-copycats
 [Powerline]: https://github.com/powerline/powerline
 [lcpz/lain]: https://github.com/lcpz/lain
-[Terminus]: https://aur.archlinux.org/packages/terminus-font-ttf/
+[Terminus]: https://www.archlinux.org/packages/community/any/terminus-font/
 [screenshots]: #Screenshots
 [troubleshooting]: #Troubleshooting
 [awesome-lainmod]: https://github.com/Kirill-Bugaev/awesome-lainmod
