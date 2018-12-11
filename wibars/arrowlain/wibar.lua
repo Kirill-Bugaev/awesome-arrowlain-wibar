@@ -10,6 +10,7 @@ local base16		= require("base16")
 local awful 		= require("awful")
 local wibox 		= require("wibox")
 local wibars		= require("wibars") 
+local helpers		= require("lainmod.helpers")
 
 local secrets = wibars.arrowlain.secrets
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -69,7 +70,8 @@ local function factory (args)
 	notification_preset = {
 	    position = position .. "_right",
 	    bg = cs.palette.notification_bg, 
-	    fg = cs.palette.notification_fg
+	    fg = cs.palette.notification_fg,
+	    font = font
 	}
     }
     if compact then
@@ -170,7 +172,7 @@ local function factory (args)
 	nqemu
     }
     wt = order_widgets(wt, dir)
-    local single = make_single(wt)
+    local single = helpers.make_single_widget(wt, wibox.layout.align.horizontal)
     if dir == "right" then
 	arrowlain_left = single
 	arrowlain_right = nil
