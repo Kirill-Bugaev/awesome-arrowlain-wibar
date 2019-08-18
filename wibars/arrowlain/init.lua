@@ -10,7 +10,7 @@
 local wrequire     = require("lainmod.helpers").wrequire
 local setmetatable = setmetatable
 
-local arrowlain = { _NAME = "wibars.arrowlain" } 
+local arrowlain = { _NAME = "wibars.arrowlain" }
 
 return setmetatable(arrowlain, { __index = wrequire })
 

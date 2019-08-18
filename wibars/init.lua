@@ -10,6 +10,6 @@
 local wrequire     = require("lainmod.helpers").wrequire
 local setmetatable = setmetatable
 
-local wibars = { _NAME = "wibars" } 
+local wibars = { _NAME = "wibars" }
 
 return setmetatable(wibars, { __index = wrequire })

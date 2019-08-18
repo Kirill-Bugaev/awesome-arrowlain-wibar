@@ -276,9 +276,9 @@ end
 
 If you have only one mailbox you may want to switch off second widget, see [switching off unwanted widgets][] section.
 
-#### Bonus: Samba and QEMU
+#### Bonus: Apache, MariaDB, php-fpm, Samba and QEMU
 
-This naked (not wrapped in arrow) widgets show corresponding icons on wibar when Samba server or QEMU virtual machine is running.
+This naked (not wrapped in arrow) widgets show corresponding icons on wibar when Apache web server, MariaDB, php-fpm, Samba server or QEMU virtual machine is running.
 
 #### Adding your widgets to wibar
 

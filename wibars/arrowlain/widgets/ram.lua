@@ -15,12 +15,12 @@ local function factory (args)
 
     local font 			= args.font or "xos4 Terminus 9"
     local cs   			= args.cs or base16.solarized_dark
+    local fg			= args.fg or cs.palette.barfg
     local notification_preset 	= args.notification_preset or {}
     local spacer		= args.spacer or " "
     local compact		= args.compact
     if compact then spacer = "" end
 
-    local fg   		= cs.palette.barfg
     local icon_ram      = cs.paths.lainicons .. "ram.png"
 
     local ramicon = wibox.widget.imagebox(icon_ram)
