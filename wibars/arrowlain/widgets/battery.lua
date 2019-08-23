@@ -23,34 +23,40 @@ local function factory(args)
 	local icon_battery_low   = cs.paths.lainicons .. "battery_low.png"
 	local icon_battery_empty = cs.paths.lainicons .. "battery_empty.png"
 
-	local baticon = wibox.widget.imagebox(icon_battery)
-	local battery = lainmod.widget.battery( {
-		settings = function(widget, bat_now)
-			if bat_now.status and bat_now.status ~= "N/A" then
-				if bat_now.ac_status == 1 then
-					local st = "AC"
-					if compact then st = "" end
-					widget:set_markup(markup.fontfg(font, fg, spacer .. st))
-					baticon:set_image(icon_ac)
-					return
-				elseif not bat_now.perc and tonumber(bat_now.perc) <= 5 then
-					baticon:set_image(icon_battery_empty)
-				elseif not bat_now.perc and tonumber(bat_now.perc) <= 15 then
-					baticon:set_image(icon_battery_low)
+	if not mybattery_widget then
+	  -- make global for all screens
+		mybattery_widget = {}
+		mybattery_widget.icon = wibox.widget.imagebox(icon_battery)
+		mybattery_widget.battery = lainmod.widget.battery( {
+			cs = cs,
+			msg_tout = 5,
+			settings = function(widget, bat_now)
+				if bat_now.status and bat_now.status ~= "N/A" then
+					if bat_now.ac_status == 1 then
+						local st = "AC"
+						if compact then st = "" end
+						widget:set_markup(markup.fontfg(font, fg, spacer .. st))
+						mybattery_widget.icon:set_image(icon_ac)
+						return
+					elseif not bat_now.perc and tonumber(bat_now.perc) <= 5 then
+						mybattery_widget.icon:set_image(icon_battery_empty)
+					elseif not bat_now.perc and tonumber(bat_now.perc) <= 15 then
+						mybattery_widget.icon:set_image(icon_battery_low)
+					else
+						mybattery_widget.icon:set_image(icon_battery)
+					end
+					widget:set_markup(markup.fontfg(font, fg, spacer .. bat_now.perc .. "%"))
 				else
-					baticon:set_image(icon_battery)
+					widget:set_markup(markup.fontfg(font, fg, spacer .. "N/A"))
+					mybattery_widget.icon:set_image(icon_ac)
 				end
-				widget:set_markup(markup.fontfg(font, fg, spacer .. bat_now.perc .. "%"))
-			else
-				widget:set_markup(markup.fontfg(font, fg, spacer .. "N/A"))
-				baticon:set_image(icon_ac)
 			end
-		end
-	} )
+		} )
+	end
 
 	local widget = wibox.widget {
-		baticon,
-		battery,
+		mybattery_widget.icon,
+		mybattery_widget.battery.widget,
 		layout = wibox.layout.align.horizontal
 	}
 

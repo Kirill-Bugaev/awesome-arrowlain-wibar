@@ -20,24 +20,32 @@ local function factory(args)
 
 	local icon_temp	= cs.paths.lainicons .. "temp.png"
 
-	local tempicon = wibox.widget.imagebox(icon_temp)
-	if compact then tempicon = nil end
-	local temp = lainmod.widget.systemp( {
-		settings = function(widget, systemp_now)
-			local st
-			if systemp_now ~= "N/A" then
-				st = math.floor(systemp_now + 0.5) .. "°C"
-			else
-				st = "N/A"
-			end
-			widget:set_markup(markup.fontfg(font, fg, spacer .. st))
+	if not mysystemp_widget then
+	  -- make global for all screens
+		mysystemp_widget = {}
+		if compact then
+			mysystemp_widget.icon = nil
+		else
+			mysystemp_widget.icon = wibox.widget.imagebox(icon_temp)
 		end
-	} )
+		mysystemp_widget.temp = lainmod.widget.systemp( {
+			dev = "acpitz-virtual-0", -- change it according to your lm_sensors device
+			settings = function(widget, systemp_now)
+				local st
+				if systemp_now ~= "N/A" then
+					st = math.floor(systemp_now + 0.5) .. "°C"
+				else
+					st = "N/A"
+				end
+				widget:set_markup(markup.fontfg(font, fg, spacer .. st))
+			end
+		} )
+	end
 
 	-- make single widget
 	local widget = wibox.widget {
-		tempicon,
-		temp,
+		mysystemp_widget.icon,
+		mysystemp_widget.temp.widget,
 		layout = wibox.layout.align.horizontal
 	}
 

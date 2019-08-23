@@ -22,32 +22,37 @@ local function factory(args)
 	local compact = args.compact
 	if compact then margin = 0 end
 
-	local phpfpmicon = wibox.widget.imagebox()
-	local phpfpm = lainmod.widget.phpfpm({
-		timeout  = 2,
-		settings = function(widget, status)
-			if status == 0 then
-				phpfpmicon:set_image(icon_phpfpm)
-				-- widget:set_markup(markup.fontfg(font, fg, "php-fpm on"))
-				widget:set_markup(markup.fontfg(font, fg, ""))
-				if margined_phpfpm ~= nil then
-					margined_phpfpm.right = margin
-				end
-			else
-				widget:set_text("")
-				phpfpmicon._private.image = nil
-				phpfpmicon:emit_signal("widget::redraw_needed")
-				phpfpmicon:emit_signal("widget::layout_changed")
-				if margined_phpfpm ~= nil then
-					margined_phpfpm.right = 0
+	if not myphpfpm_widget then
+		-- make global for all screens
+		myphpfpm_widget = {}
+		myphpfpm_widget.icon = wibox.widget.imagebox()
+		myphpfpm_widget.php = lainmod.widget.phpfpm( {
+			timeout  = 2,
+			settings = function(widget, status)
+				if status == 0 then
+					myphpfpm_widget.icon:set_image(icon_phpfpm)
+					-- widget:set_markup(markup.fontfg(font, fg, "php-fpm on"))
+					widget:set_markup(markup.fontfg(font, fg, ""))
+					if myphpfpm_widget.margined ~= nil then
+						myphpfpm_widget.margined.right = margin
+					end
+				else
+					widget:set_text("")
+					myphpfpm_widget.icon._private.image = nil
+					myphpfpm_widget.icon:emit_signal("widget::redraw_needed")
+					myphpfpm_widget.icon:emit_signal("widget::layout_changed")
+					if myphpfpm_widget.margined ~= nil then
+						myphpfpm_widget.margined.right = 0
+					end
 				end
 			end
-		end})
+		} )
+		myphpfpm_widget.margined = wibox.container.margin(myphpfpm_widget.php.widget, 0, margin)
+	end
 
-	margined_phpfpm = wibox.container.margin(phpfpm.widget, 0, margin)
   local widget = wibox.widget {
-		phpfpmicon,
-		margined_phpfpm,
+		myphpfpm_widget.icon,
+		myphpfpm_widget.margined,
 		layout = wibox.layout.align.horizontal
 	}
 

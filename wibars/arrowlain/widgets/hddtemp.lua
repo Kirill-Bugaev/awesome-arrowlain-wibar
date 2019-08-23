@@ -20,21 +20,28 @@ local function factory(args)
 
 	local icon_temp = cs.paths.lainicons .. "temp.png"
 
-	local tempicon = wibox.widget.imagebox(icon_temp)
-	if compact then tempicon = nil end
-	local temp = lainmod.widget.hddtemp( {
-		settings = function(widget, hddtemp_now)
-			local st
-			if hddtemp_now ~= "N/A" then st = hddtemp_now .. "°C"
-			else st = "N/A" end
-			widget:set_markup(markup.fontfg(font, fg, spacer .. st))
+	if not myhddtemp_widget then
+		-- make global for all screens
+		myhddtemp_widget = {}
+		if compact then
+			myhddtemp_widget.icon = nil
+		else
+		myhddtemp_widget.icon = wibox.widget.imagebox(icon_temp)
 		end
-	} )
+		myhddtemp_widget.temp = lainmod.widget.hddtemp( {
+			settings = function(widget, hddtemp_now)
+				local st
+				if hddtemp_now ~= "N/A" then st = hddtemp_now .. "°C"
+				else st = "N/A" end
+				widget:set_markup(markup.fontfg(font, fg, spacer .. st))
+			end
+		} )
+	end
 
 	-- make single widget
 	local widget = wibox.widget {
-		tempicon,
-		temp,
+		myhddtemp_widget.icon,
+		myhddtemp_widget.temp.widget,
 		layout = wibox.layout.align.horizontal
 	}
 

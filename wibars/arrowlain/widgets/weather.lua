@@ -34,39 +34,44 @@ local function factory(args)
 		["50"] = "🌫",
 	}
 
-	local weathericon = wibox.widget.imagebox(icon_weather)
-	if compact then
-		spacer = ""
-		at = ""
-		weathericon = nil
-	end
-	local weather = lainmod.widget.weather( {
-		APPID               = secrets.openweather_api_key,
-		-- Novosibirsk 1496747
-		-- Bratsk 2051523
-		city_id             = 2051523,
-		followtag           = true,
-		notification_preset = notification_preset,
-		weather_na_markup   = markup.fontfg(font, fg, spacer .. "N/A"),
-		settings = function(widget, weather_now)
-			local descr
-			if compact then
-				descr = compact_icons[weather_now["weather"][1]["icon"]:sub(1, 2)]
-			else
-				descr = weather_now["weather"][1]["description"]:lower()
-			end
-			local units = math.floor(weather_now["main"]["temp"] + 0.5)
-			widget:set_markup(markup.fontfg(font, fg, spacer .. descr .. spacer .. at .. spacer .. units .."°C"))
+	if not myweather_widget then
+	  -- make global for all screens
+		myweather_widget = {}
+		if compact then
+			spacer = ""
+			at = ""
+			myweather_widget.icon = nil
+		else
+			myweather_widget.icon = wibox.widget.imagebox(icon_weather)
 		end
-	} )
-	if not compact then
-		weathericon:connect_signal("mouse::enter", function () weather.show(0) end)
-		weathericon:connect_signal("mouse::leave", function () weather.hide() end)
+		myweather_widget.weather = lainmod.widget.weather( {
+			APPID               = secrets.openweather_api_key,
+			-- Novosibirsk 1496747
+			-- Bratsk 2051523
+			city_id             = 2051523,
+			followtag           = true,
+			notification_preset = notification_preset,
+			weather_na_markup   = markup.fontfg(font, fg, spacer .. "N/A"),
+			settings = function(widget, weather_now)
+				local descr
+				if compact then
+					descr = compact_icons[weather_now["weather"][1]["icon"]:sub(1, 2)]
+				else
+					descr = weather_now["weather"][1]["description"]:lower()
+				end
+				local units = math.floor(weather_now["main"]["temp"] + 0.5)
+				widget:set_markup(markup.fontfg(font, fg, spacer .. descr .. spacer .. at .. spacer .. units .."°C"))
+			end
+		} )
+		if not compact then
+			myweather_widget.icon:connect_signal("mouse::enter", function() myweather_widget.weather.show(0) end)
+			myweather_widget.icon:connect_signal("mouse::leave", function() myweather_widget.weather.hide() end)
+		end
 	end
 
 	local widget = wibox.widget {
-		weathericon,
-		weather,
+		myweather_widget.icon,
+		myweather_widget.weather.widget,
 		layout = wibox.layout.align.horizontal
 	}
 

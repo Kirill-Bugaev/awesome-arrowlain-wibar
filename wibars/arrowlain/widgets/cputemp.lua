@@ -20,24 +20,32 @@ local function factory(args)
 
 	local icon_temp = cs.paths.lainicons .. "temp.png"
 
-	local tempicon = wibox.widget.imagebox(icon_temp)
-	if compact then tempicon = nil end
-	local temp = lainmod.widget.cputemp( {
-		settings = function(widget, coretemp_now)
-			local st
-			if coretemp_now ~= "N/A" then
-				st = math.floor(coretemp_now + 0.5) .. "°C"
-			else
-				st = "N/A"
-	    end
-			widget:set_markup(markup.fontfg(font, fg, spacer .. st))
+	if not mycputemp_widget then
+	  -- make global for all screens
+		mycputemp_widget = {}
+		if compact then
+			mycputemp_widget.icon = nil
+		else
+			mycputemp_widget.icon = wibox.widget.imagebox(icon_temp)
 		end
-	} )
+		mycputemp_widget.temp = lainmod.widget.cputemp( {
+			dev = "k10temp-pci-00c3", -- change it according to your lm_sensors device
+			settings = function(widget, coretemp_now)
+				local st
+				if coretemp_now ~= "N/A" then
+					st = math.floor(coretemp_now + 0.5) .. "°C"
+				else
+					st = "N/A"
+		    end
+				widget:set_markup(markup.fontfg(font, fg, spacer .. st))
+			end
+		} )
+	end
 
 	-- make single widget
 	local widget = wibox.widget {
-		tempicon,
-		temp,
+		mycputemp_widget.icon,
+		mycputemp_widget.temp.widget,
 		layout = wibox.layout.align.horizontal
 	}
 

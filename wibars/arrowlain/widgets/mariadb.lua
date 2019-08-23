@@ -15,39 +15,51 @@ local icons_path   = widget_path .. "icons/"
 local icon_mariadb = icons_path .. "mariadb.png"
 
 local function factory(args)
-	local font    = args.font or "xos4 Terminus 9"
-	local cs      = args.cs or base16.solarized_dark
-	local fg      = args.fg or cs.palette.barfg
-	local margin  = args.margin or 5
-	local compact = args.compact
+	local font                = args.font or "xos4 Terminus 9"
+	local cs                  = args.cs or base16.solarized_dark
+	local fg                  = args.fg or cs.palette.barfg
+	local notification_preset = args.notification_preset or {}
+	local margin              = args.margin or 5
+	local compact             = args.compact
 	if compact then margin = 0 end
 
-	local mariadbicon = wibox.widget.imagebox()
-	local mariadb = lainmod.widget.mariadb({
-		timeout  = 2,
-		settings = function(widget, status)
-			if status == 0 then
-				mariadbicon:set_image(icon_mariadb)
-				-- widget:set_markup(markup.fontfg(font, fg, "mariadb on"))
-				widget:set_markup(markup.fontfg(font, fg, ""))
-				if margined_mariadb ~= nil then
-					margined_mariadb.right = margin
-				end
-			else
-				widget:set_text("")
-				mariadbicon._private.image = nil
-				mariadbicon:emit_signal("widget::redraw_needed")
-				mariadbicon:emit_signal("widget::layout_changed")
-				if margined_mariadb ~= nil then
-					margined_mariadb.right = 0
+	if not mymariadb_widget then
+		-- make global for all screens
+		mymariadb_widget = {}
+		mymariadb_widget.icon = wibox.widget.imagebox()
+		mymariadb_widget.mariadb = lainmod.widget.mariadb( {
+			timeout  = 2,
+			logfile = "/var/log/mysql/mariadb.log",
+			loglength = 30,
+			followtag = true,
+			log_notification_preset = notification_preset,
+			settings = function(widget, status)
+				if status == 0 then
+					mymariadb_widget.icon:set_image(icon_mariadb)
+					-- widget:set_markup(markup.fontfg(font, fg, "mariadb on"))
+					widget:set_markup(markup.fontfg(font, fg, ""))
+					if mymariadb_widget.margined ~= nil then
+						mymariadb_widget.margined.right = margin
+					end
+				else
+					widget:set_text("")
+					mymariadb_widget.icon._private.image = nil
+					mymariadb_widget.icon:emit_signal("widget::redraw_needed")
+					mymariadb_widget.icon:emit_signal("widget::layout_changed")
+					if mymariadb_widget.margined ~= nil then
+						mymariadb_widget.margined.right = 0
+					end
 				end
 			end
-		end})
+		} )
+		mymariadb_widget.icon:connect_signal("mouse::enter", function() mymariadb_widget.mariadb.show_log(1) end)
+		mymariadb_widget.icon:connect_signal("mouse::leave", function() mymariadb_widget.mariadb.hide_log() end)
+		mymariadb_widget.margined = wibox.container.margin(mymariadb_widget.mariadb.widget, 0, margin)
+	end
 
-	margined_mariadb = wibox.container.margin(mariadb.widget, 0, margin)
   local widget = wibox.widget {
-		mariadbicon,
-		margined_mariadb,
+		mymariadb_widget.icon,
+		mymariadb_widget.margined,
 		layout = wibox.layout.align.horizontal
 	}
 

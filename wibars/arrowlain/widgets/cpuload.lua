@@ -21,21 +21,25 @@ local function factory(args)
 
 	local icon_cpu = cs.paths.lainicons .. "cpu.png"
 
-	local cpuicon = wibox.widget.imagebox(icon_cpu)
-	local cpu = lainmod.widget.cpu( {
-		followtag = true,
-		ps_notification_preset = notification_preset,
-		settings = function(widget, cpu_now)
-			widget:set_markup(markup.fontfg(font, fg, spacer .. cpu_now.usage .. "%"))
-		end
-	} )
-	cpuicon:connect_signal("mouse::enter", function () cpu.show_ps_output(0) end)
-	cpuicon:connect_signal("mouse::leave", function () cpu.hide_ps_output() end)
+	if not mycpuload_widget then
+	  -- make global for all screens
+		mycpuload_widget = {}
+		mycpuload_widget.icon = wibox.widget.imagebox(icon_cpu)
+		mycpuload_widget.cpu = lainmod.widget.cpu( {
+			followtag = true,
+			ps_notification_preset = notification_preset,
+			settings = function(widget, cpu_now)
+				widget:set_markup(markup.fontfg(font, fg, spacer .. cpu_now.usage .. "%"))
+			end
+		} )
+		mycpuload_widget.icon:connect_signal("mouse::enter", function() mycpuload_widget.cpu.show_ps_output(1) end)
+		mycpuload_widget.icon:connect_signal("mouse::leave", function() mycpuload_widget.cpu.hide_ps_output() end)
+	end
 
 	-- make single widget
 	local widget = wibox.widget {
-		cpuicon,
-		cpu,
+		mycpuload_widget.icon,
+		mycpuload_widget.cpu.widget,
 		layout = wibox.layout.align.horizontal
 	}
 

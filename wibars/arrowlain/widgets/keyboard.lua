@@ -52,25 +52,37 @@ local function factory (args)
 
 	local icon_kb = cs.paths.lainicons .. "keyboard2.png"
 
-	local kbicon = wibox.widget.imagebox(icon_kb)
-	if compact then kbicon = nil end
-
-	-- this widget is single for all screen, so make it only once
-	if not kblayout then
-		kblayout = awful.widget.keyboardlayout()
+	if not mykeyboard_widget then
+		-- make global for all screens and key bindings
+		mykeyboard_widget = {}
+		if compact then
+			mykeyboard_widget.icon = nil
+		else
+			mykeyboard_widget.icon = wibox.widget.imagebox(icon_kb)
+		end
+		mykeyboard_widget.kblayout = awful.widget.keyboardlayout()
 		-- CapsLock handler
 		capslock_toggle_flag = 0
-		caps_hook(kblayout.widget);
-		kblayout.widget:connect_signal("widget::redraw_needed", function() caps_hook(kblayout.widget) end)
+		caps_hook(mykeyboard_widget.kblayout.widget)
+		mykeyboard_widget.kblayout.widget:connect_signal("widget::redraw_needed",
+			function()
+				caps_hook(mykeyboard_widget.kblayout.widget)
+			end
+		)
 		-- make toggle global for key binding
-		capslock_toggle = function() caps_tg(kblayout.widget) end
-	end
+		capslock_toggle = function() caps_tg(mykeyboard_widget.kblayout.widget) end
+		end
 
 	local widget = wibox.widget {
-		kbicon,
-		kblayout,
+		mykeyboard_widget.icon,
+		mykeyboard_widget.kblayout,
 		layout = wibox.layout.align.horizontal
 	}
+
+	-- Bug when bind 'caps_tg' to CapsLock key , so hook on timer too
+	helpers.newtimer("kblayout", 5, function()
+		caps_hook(mykeyboard_widget.kblayout.widget)
+	end)
 
 	return widget
 end

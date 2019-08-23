@@ -22,40 +22,46 @@ local function factory(args)
 	local icon_time    = cs.paths.lainicons .. "time.png"
 	-- local cal_icons = cs.paths.calicons
 
-	-- make textclock
-	local timeicon = wibox.widget.imagebox(icon_time)
-	if compact then timeicon = nil end
-	local st = markup.fontfg(font, fg, spacer .. "%a" .. spacer .. "%d") -- day of week and day of month
-	if not compact then
-		st = st .. markup.fontfg(font, fg, spacer .. "%b")                 -- month
-	end
-	st =  st .. markup.fontfg(font, fg, spacer .. ">" .. spacer)
-		.. markup.fontfg(font, fg, "%H:%M")                                -- time
-	local textclock = wibox.widget.textclock(st)
-	-- local textclock = wibox.widget.textclock(markup.fontfg(font, fg, spacer .. "%a %d %b")
-	-- 	.. markup.fontfg(font, fg, " > ") .. markup.fontfg(font, fg, "%H:%M"))
+	if not myclock_widget then
+	  -- make global for all screens
+		myclock_widget = {}
 
-	-- attach calendar
-	local attach_to = {}
-	if not compact then
-		table.insert(attach_to, timeicon)
+		-- make textclock
+		myclock_widget.icon = wibox.widget.imagebox(icon_time)
+		if compact then myclock_widget.icon = nil end
+		local st = markup.fontfg(font, fg, spacer .. "%a" .. spacer .. "%d") -- day of week and day of month
+		if not compact then
+			st = st .. markup.fontfg(font, fg, spacer .. "%b")                 -- month
+		end
+		st =  st .. markup.fontfg(font, fg, spacer .. ">" .. spacer)
+			.. markup.fontfg(font, fg, "%H:%M")                                -- time
+		myclock_widget.textclock = wibox.widget.textclock(st)
+		-- local myclock_widget.textclock = wibox.widget.textclock(markup.fontfg(font, fg, spacer .. "%a %d %b")
+		-- 	.. markup.fontfg(font, fg, " > ") .. markup.fontfg(font, fg, "%H:%M"))
+
+		-- attach calendar
+		local attach_to = {}
+		if not compact then
+			table.insert(attach_to, myclock_widget.icon)
+		end
+		table.insert(attach_to, myclock_widget.textclock)
+		
+		lainmod.widget.calendar( {
+			cal = "cal --color=always",
+			attach_to = attach_to,
+			followtag = true,
+			-- icons = cal_icons,
+			currentday = {
+				bg = cs.palette.barbg,
+				fg = cs.palette.barfg
+			},
+			notification_preset = notification_preset -- default
+		} )
 	end
-	table.insert(attach_to, textclock)
-	lainmod.widget.calendar( {
-		cal = "cal --color=always",
-		attach_to = attach_to,
-		followtag = true,
-		-- icons = cal_icons,
-		currentday = {
-			bg = cs.palette.barbg,
-			fg = cs.palette.barbg_magenta
-		},
-		notification_preset = notification_preset	-- default
-	} )
 
 	local widget = wibox.widget {
-		timeicon,
-		textclock,
+		myclock_widget.icon,
+		myclock_widget.textclock,
 		layout = wibox.layout.align.horizontal
 	}
 

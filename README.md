@@ -197,6 +197,15 @@ Now you can change volume level with Mod4-Alt-ArrowUp and Mod4-Alt-ArrowDown key
 #### Keyboard layout
 
 It shows current keyboard layout. Layout can be changed by clicking on widget.
+You can bind CapsLock toggle to CapsLock key in your `rc.lua`
+```
+-- CapsLock handler
+awful.key({}, "#66",
+	function()
+		capslock_toggle();
+	end,
+{description="CapsLock", group="awesome"}),
+```
 
 #### CPU
 
@@ -213,12 +222,12 @@ Adapter: PCI adapter
 temp1:        +69.5°C  (high = +70.0°C)
 ```
 
-Now you should change device name in Lain `cputemp.lua` configuration file (`~/.config/awesome/lainmod/widget/cputemp.lua` by default) in `factory` function to the one that corresponds your CPU:
+Now you should change device name in Lain `cputemp.lua` configuration file (`~/.config/awesome/arrowlain/widgets/cputemp.lua` by default) in `factory` function to the one that corresponds your CPU:
 
 ```lua
 local function factory(args)
-...
-    local dev = "k10temp-pci-00c3" 
+mycputemp_widget.temp = lainmod.widget.cputemp( {
+	dev = "k10temp-pci-00c3", -- change it according to your lm_sensors device
 ...
 end
 ``` 

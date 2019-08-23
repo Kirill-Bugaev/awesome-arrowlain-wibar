@@ -63,7 +63,7 @@ local function factory(args)
 		spacer              = " ",
 		compact             = compact,
 		cs                  = cs,
-		fg                  = cs.palette.colorized_barfg_unfocus,	-- for text on colorized arrows
+		fg                  = cs.palette.colorized_barfg_unfocus, -- for text on colorized arrows
 		notification_preset = {
 			position = position .. "_right",
 			bg       = cs.palette.notification_bg,
@@ -91,7 +91,10 @@ local function factory(args)
 	-- Arrow wrapped widgets
 	-- Text clock
 	-- naked
-	local nclock = widgets.clock(widgetsettings)
+	local clockw_set = helpers.deep_table_copy(widgetsettings)
+	clockw_set.notification_preset.fg = cs.palette.colorized_barfg_unfocus
+	clockw_set.notification_preset.bg = cs.palette.barbg_magenta
+	local nclock = widgets.clock(clockw_set)
 	-- wrapped
 	local wclock = arrow_wrapper (
 		nclock,
@@ -104,7 +107,10 @@ local function factory(args)
 		true
 	)
 	-- Weather
-	local nweather = widgets.weather(widgetsettings)
+	local weatherw_set = helpers.deep_table_copy(widgetsettings)
+	weatherw_set.notification_preset.fg = cs.palette.colorized_barfg_unfocus
+	weatherw_set.notification_preset.bg = cs.palette.barbg_blue
+	local nweather = widgets.weather(weatherw_set)
 	local wweather = arrow_wrapper (
 		nweather,
 		cs.palette.barbg_blue,
@@ -152,7 +158,10 @@ local function factory(args)
 		false
 	)
 	-- CPU load and temperature
-	local ncpuload = widgets.cpuload(widgetsettings)
+	local cpuw_set = helpers.deep_table_copy(widgetsettings)
+	cpuw_set.notification_preset.fg = cs.palette.colorized_barfg_unfocus
+	cpuw_set.notification_preset.bg = cs.palette.barbg_red
+	local ncpuload = widgets.cpuload(cpuw_set)
 	local ncputemp = widgets.cputemp(widgetsettings)
 	local ncpu = wibox.widget {
 		wibox.container.margin(ncpuload, margins.cpuload.left, margins.cpuload.right),
@@ -170,7 +179,10 @@ local function factory(args)
 		false
 	)
 	-- RAM and system temperature
-	local nram = widgets.ram(widgetsettings)
+	local ramw_set = helpers.deep_table_copy(widgetsettings)
+	ramw_set.notification_preset.fg = cs.palette.colorized_barfg_unfocus
+	ramw_set.notification_preset.bg = cs.palette.barbg_orange
+	local nram = widgets.ram(ramw_set)
 	local nsystemp = widgets.systemp(widgetsettings)
 	local nramsys = wibox.widget {
 		wibox.container.margin(nram, margins.ram.left, margins.ram.right),
@@ -188,7 +200,10 @@ local function factory(args)
 		false
 	)
 	-- File system and HDD temperature
-	local nfs = widgets.fs(widgetsettings)
+	local fsw_set = helpers.deep_table_copy(widgetsettings)
+	fsw_set.notification_preset.fg = cs.palette.colorized_barfg_unfocus
+	fsw_set.notification_preset.bg = cs.palette.barbg_green
+	local nfs = widgets.fs(fsw_set)
 	local nhddtemp = widgets.hddtemp(widgetsettings)
 	local nfshdd = wibox.widget {
 		wibox.container.margin(nfs, margins.fs.left, margins.fs.right),
@@ -206,7 +221,10 @@ local function factory(args)
 		false
 	)
 	-- Net
-	local nnet = widgets.net(widgetsettings)
+	local netw_set = helpers.deep_table_copy(widgetsettings)
+	netw_set.notification_preset.fg = cs.palette.colorized_barfg_unfocus
+	netw_set.notification_preset.bg = cs.palette.barbg_blue
+	local nnet = widgets.net(netw_set)
 	local wnet = arrow_wrapper (
 		nnet,
 		cs.palette.barbg_blue,
@@ -217,10 +235,13 @@ local function factory(args)
 		cs.palette.barbrbg,
 		false
 	)
-	-- IMAP mail
-	widgetsettings.fg = cs.palette.barbrfg
-	local nmail1 = widgets.mail(widgetsettings, secrets.mail1.account, secrets.mail1.password, 1)
-	local nmail2 = widgets.mail(widgetsettings, secrets.mail2.account, secrets.mail2.password, 0)
+	-- Mail
+	local mailw_set = helpers.deep_table_copy(widgetsettings)
+	mailw_set.notification_preset.fg = cs.palette.barbrfg
+	mailw_set.notification_preset.bg = cs.palette.barbrbg
+	mailw_set.fg = cs.palette.barbrfg
+	local nmail1 = widgets.mail(mailw_set, secrets.mail1.account, secrets.mail1.password, 1)
+	local nmail2 = widgets.mail(mailw_set, secrets.mail2.account, secrets.mail2.password, 0)
 	local nmail = wibox.widget {
 		wibox.container.margin(nmail1, margins.mail1.left, margins.mail1.right),
 		wibox.container.margin(nmail2, margins.mail2.left, margins.mail2.right),

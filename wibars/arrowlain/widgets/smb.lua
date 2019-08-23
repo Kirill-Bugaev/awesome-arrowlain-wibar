@@ -22,34 +22,38 @@ local function factory(args)
 	local compact = args.compact
 	if compact then margin = 0 end
 
-	local smbicon = wibox.widget.imagebox()
-	local smb = lainmod.widget.smb({
-		timeout  = 2,
-		settings = function(widget, status)
-			if status == 0 then
-				smbicon:set_image(icon_smb)
-				-- widget:set_markup(markup.fontfg(font, fg, "smb on"))
-				widget:set_markup(markup.fontfg(font, fg, ""))
-				if margined_smb ~= nil then
-					margined_smb.right = margin
-				end
-			else
-				widget:set_text("")
-				smbicon._private.image = nil
-				smbicon:emit_signal("widget::redraw_needed")
-				smbicon:emit_signal("widget::layout_changed")
-				if margined_smb ~= nil then
-					margined_smb.right = 0
+	if not mysmb_widget then
+		-- make global for all screens
+		mysmb_widget = {}
+		mysmb_widget.icon = wibox.widget.imagebox()
+		mysmb_widget.smb = lainmod.widget.smb( {
+			timeout  = 2,
+			settings = function(widget, status)
+				if status == 0 then
+					mysmb_widget.icon:set_image(icon_smb)
+					-- widget:set_markup(markup.fontfg(font, fg, "smb on"))
+					widget:set_markup(markup.fontfg(font, fg, ""))
+					if mysmb_widget.margined ~= nil then
+						mysmb_widget.margined.right = margin
+					end
+				else
+					widget:set_text("")
+					mysmb_widget.icon._private.image = nil
+					mysmb_widget.icon:emit_signal("widget::redraw_needed")
+					mysmb_widget.icon:emit_signal("widget::layout_changed")
+					if mysmb_widget.margined ~= nil then
+						mysmb_widget.margined.right = 0
+					end
 				end
 			end
-		end
-	})
+		} )
+		mysmb_widget.margined = wibox.container.margin(mysmb_widget.smb.widget, 0, margin)
+	end
 
-	margined_smb = wibox.container.margin(smb.widget, 0, margin)
 	local widget = wibox.widget {
-		smbicon,
+		mysmb_widget.icon,
 		-- wibox.container.margin(smb.widget, 0, margin),
-		margined_smb,
+		mysmb_widget.margined,
 		layout = wibox.layout.align.horizontal
 	}
 

@@ -22,34 +22,38 @@ local function factory(args)
 	local compact = args.compact
 	if compact then margin = 0 end
 
-	local qemuicon = wibox.widget.imagebox()
-	local qemu = lainmod.widget.qemu( {
-		timeout  = 2,
-		settings = function(widget, status)
-			if status == 0 then
-				qemuicon:set_image(icon_qemu)
-				widget:set_markup(markup.fontfg(font, fg, "qemu on"))
-				widget:set_markup(markup.fontfg(font, fg, ""))
-				if margined_qemu ~= nil then
-					margined_qemu.right = margin
-				end
-			else
-				widget:set_text("")
-				qemuicon._private.image = nil
-				qemuicon:emit_signal("widget::redraw_needed")
-				qemuicon:emit_signal("widget::layout_changed")
-				if margined_qemu ~= nil then
-					margined_qemu.right = 0
+	if not myqemu_widget then
+		-- make global for all screens
+		myqemu_widget = {}
+		myqemu_widget.icon = wibox.widget.imagebox()
+		myqemu_widget.qemu = lainmod.widget.qemu( {
+			timeout  = 2,
+			settings = function(widget, status)
+				if status == 0 then
+					myqemu_widget.icon:set_image(icon_qemu)
+					widget:set_markup(markup.fontfg(font, fg, "qemu on"))
+					widget:set_markup(markup.fontfg(font, fg, ""))
+					if myqemu_widget.margined ~= nil then
+						myqemu_widget.margined.right = margin
+					end
+				else
+					widget:set_text("")
+					myqemu_widget.icon._private.image = nil
+					myqemu_widget.icon:emit_signal("widget::redraw_needed")
+					myqemu_widget.icon:emit_signal("widget::layout_changed")
+					if myqemu_widget.margined ~= nil then
+						myqemu_widget.margined.right = 0
+					end
 				end
 			end
-		end
-	} )
+		} )
+		myqemu_widget.margined = wibox.container.margin(myqemu_widget.qemu.widget, 0, margin)
+	end
 
-	margined_qemu = wibox.container.margin(qemu.widget, 0, margin)
 	local widget = wibox.widget {
-		qemuicon,
+		myqemu_widget.icon,
 		-- wibox.container.margin(qemu.widget, 0, margin),
-		margined_qemu,
+		myqemu_widget.margined,
 		layout = wibox.layout.align.horizontal
 	}
 
