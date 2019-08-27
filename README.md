@@ -252,7 +252,7 @@ HDD temperature widget requires `hddtemp` and `GNU NetCat` utilities have been i
 It shows incoming and outcoming net traffic.
 
 #### Mail
-***Dependencies: lfs, socket, ssl. ArchLinux users could install [lua-filesystem][lua-filesystem], [lua-socket][lua-socket] and [lua-sec][lua-sec] packages.***
+*Dependencies: lfs, socket, ssl. ArchLinux users could install [lua-filesystem][lua-filesystem], [lua-socket][lua-socket] and [lua-sec][lua-sec] packages.*
 This widget shows unread messages in your mailboxes and open mailboxes in browser on mouse click. Also it shows popup messages when new mail is recieved.  It uses `curl` utility for recieving number of unread messages. You can install `curl` with `pacman -S curl` command for ArchLinux, although `curl` is included in `base` package group and should be installed by default during the system installation.
 In order to widget works proper way you should enter mail accounts and passwords in `secrets.lua` configuration file (`~/.config/awesome/wibars/arrowlain/secrets.lua` by default):
 
