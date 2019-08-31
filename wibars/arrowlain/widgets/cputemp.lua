@@ -29,7 +29,8 @@ local function factory(args)
 			mycputemp_widget.icon = wibox.widget.imagebox(icon_temp)
 		end
 		mycputemp_widget.temp = lainmod.widget.cputemp( {
-			dev = "k10temp-pci-00c3", -- change it according to your lm_sensors device
+			dev      = "f71889ed-isa-0480", -- change it according to your lm_sensors device
+			sensor   = "temp1",
 			settings = function(widget, coretemp_now)
 				local st
 				if coretemp_now ~= "N/A" then

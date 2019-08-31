@@ -42,8 +42,10 @@ local function factory(args)
 				) )
 			end
 		} )
-		mynet_widget.icon:connect_signal("mouse::enter", function() mynet_widget.net.show_netstat_output(1) end)
-		mynet_widget.icon:connect_signal("mouse::leave", function() mynet_widget.net.hide_netstat_output() end)
+		if not compact then
+			mynet_widget.icon:connect_signal("mouse::enter", function() mynet_widget.net.show_netstat_output(1) end)
+			mynet_widget.icon:connect_signal("mouse::leave", function() mynet_widget.net.hide_netstat_output() end)
+		end
 	end
 
 	local widget = wibox.widget {

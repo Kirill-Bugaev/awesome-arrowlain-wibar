@@ -5,11 +5,11 @@ local secrets = {
 
 	-- Mail accounts
 	mail1 = {
-		account  = "mai11@gmail.com",
+		account  = "first@gmail.com",
 		password = "password"
 	},
 	mail2 = {
-		account  = "mail2@gmail.com",
+		account  = "second@gmail.com",
 		password = "password"
 	}
 

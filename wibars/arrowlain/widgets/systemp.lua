@@ -29,7 +29,8 @@ local function factory(args)
 			mysystemp_widget.icon = wibox.widget.imagebox(icon_temp)
 		end
 		mysystemp_widget.temp = lainmod.widget.systemp( {
-			dev = "acpitz-virtual-0", -- change it according to your lm_sensors device
+			dev      = "f71889ed-isa-0480", -- change it according to your lm_sensors device
+			sensor   = "temp3",
 			settings = function(widget, systemp_now)
 				local st
 				if systemp_now ~= "N/A" then

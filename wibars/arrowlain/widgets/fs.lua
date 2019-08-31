@@ -30,7 +30,7 @@ local function factory(args)
 			notification_preset = notification_preset,
 			settings  = function(widget, fs_now)
 				-- widget:set_markup(markup.fontfg(font, fg, spacer .. string.format("%.1f", fs_now["/var"].percentage) .. "%"))
-				widget:set_markup(markup.fontfg(font, fg, spacer .. string.format("%s", fs_now["/var"].percentage) .. "%"))
+				widget:set_markup(markup.fontfg(font, fg, spacer .. string.format("%s", fs_now["/"].percentage) .. "%"))
 			end
 		} )
 		myfs_widget.icon:connect_signal("mouse::enter", function() myfs_widget.fs.show(1) end)
